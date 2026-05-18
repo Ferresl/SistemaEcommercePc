@@ -3,8 +3,6 @@ package DuocucEcommerce.Producto.Service;
 
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,7 @@ import DuocucEcommerce.Producto.Dto.FuentePoderDTO.FuentePoderUpdateDTO;
 import DuocucEcommerce.Producto.Exception.ResourceNotFoundException;
 import DuocucEcommerce.Producto.Model.FuentePoder;
 import DuocucEcommerce.Producto.Repository.FuentePoderRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +21,13 @@ public class FuentePoderService {
     private static final Logger log = LoggerFactory.getLogger(FuentePoderService.class);
     private final FuentePoderRepository repository;
     
-    public List<FuentePoderResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<FuentePoderResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
     
-    public FuentePoderResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public FuentePoderResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
     
     public FuentePoderResponseDTO buscarPorProductoId(Integer productoId) {
         return repository.findByProductoId(productoId).map(this::toResponse).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada para producto " + productoId));

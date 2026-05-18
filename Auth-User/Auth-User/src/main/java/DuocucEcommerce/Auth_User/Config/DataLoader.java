@@ -4,7 +4,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import DuocucEcommerce.Auth_User.Model.RolUsuario;
 import DuocucEcommerce.Auth_User.Model.UsuarioAuth;
 import DuocucEcommerce.Auth_User.Repository.UsuarioAuthRepository;

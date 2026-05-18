@@ -1,7 +1,7 @@
 package DuocucEcommerce.Producto.Service;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ import DuocucEcommerce.Producto.Dto.RAMDTO.RAMUpdateDTO;
 import DuocucEcommerce.Producto.Exception.ResourceNotFoundException;
 import DuocucEcommerce.Producto.Model.RAM;
 import DuocucEcommerce.Producto.Repository.RAMRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -20,10 +21,14 @@ public class RAMService {
     private final RAMRepository repository;
     
     
-    public List<RAMResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<RAMResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
     
     
-    public RAMResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public RAMResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
     
     
     public RAMResponseDTO buscarPorProductoId(Integer productoId) {

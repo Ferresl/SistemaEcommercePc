@@ -3,8 +3,6 @@ package DuocucEcommerce.Producto.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,7 @@ import DuocucEcommerce.Producto.Exception.BadRequestException;
 import DuocucEcommerce.Producto.Exception.ResourceNotFoundException;
 import DuocucEcommerce.Producto.Model.Producto;
 import DuocucEcommerce.Producto.Repository.ProductoRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -44,30 +43,66 @@ public class ProductoService {
     }
    
    
-    public void eliminar(Integer id) { repository.delete(obtenerEntidad(id)); }
+    public void eliminar(Integer id) { 
+        repository.delete(obtenerEntidad(id)); 
+    }
    
    
-    public List<ProductoResponseDTO> listarPorCategoria(Integer categoriaId) { return repository.findByCategoriaId(categoriaId).stream().map(this::toResponse).toList(); }
+    public List<ProductoResponseDTO> listarPorCategoria(Integer categoriaId) { 
+        return repository.findByCategoriaId(categoriaId).stream().map(this::toResponse).toList(); 
+    }
    
    
-    public List<ProductoResponseDTO> buscarPorTexto(String texto) { return repository.findByNombreContainingIgnoreCaseOrMarcaContainingIgnoreCase(texto, texto).stream().map(this::toResponse).toList(); }
+    public List<ProductoResponseDTO> buscarPorTexto(String texto) { 
+        return repository.findByNombreContainingIgnoreCaseOrMarcaContainingIgnoreCase(texto, texto).stream().map(this::toResponse).toList(); 
+    }
    
    
-    public List<ProductoResponseDTO> filtrarPorPrecio(BigDecimal rangoMin, BigDecimal rangoMax) { return repository.findByPrecioBetween(rangoMin, rangoMax).stream().map(this::toResponse).toList(); }
+    public List<ProductoResponseDTO> filtrarPorPrecio(BigDecimal rangoMin, BigDecimal rangoMax) { 
+        return repository.findByPrecioBetween(rangoMin, rangoMax).stream().map(this::toResponse).toList(); 
+    }
    
    
-    private void validarPrecio(BigDecimal precio) { if (precio == null || precio.compareTo(BigDecimal.ZERO) <= 0) { throw new BadRequestException("El precio debe ser mayor a 0"); } }
+    private void validarPrecio(BigDecimal precio) { 
+        if (precio == null || precio.compareTo(BigDecimal.ZERO) <= 0) 
+            { throw new BadRequestException("El precio debe ser mayor a 0"); } 
+    }
    
    
-    private Producto obtenerEntidad(Integer id) { return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id " + id)); }
+    private Producto obtenerEntidad(Integer id) { 
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id " + id)); 
+    }
    
    
-    private void copiarDatos(ProductoCreateDTO dto, Producto producto) { producto.setNombre(dto.getNombre()); producto.setMarca(dto.getMarca()); producto.setModelo(dto.getModelo()); producto.setPrecio(dto.getPrecio()); producto.setImagenUrl(dto.getImagenUrl()); producto.setCategoriaId(dto.getCategoriaId()); producto.setEstado(dto.getEstado()); }
+    private void copiarDatos(ProductoCreateDTO dto, Producto producto) { 
+        producto.setNombre(dto.getNombre());
+        producto.setMarca(dto.getMarca()); 
+        producto.setModelo(dto.getModelo()); 
+        producto.setPrecio(dto.getPrecio()); 
+        producto.setCategoriaId(dto.getCategoriaId()); 
+        producto.setEstado(dto.getEstado()); 
+    }
    
    
    
-    private void copiarDatos(ProductoUpdateDTO dto, Producto producto) { producto.setNombre(dto.getNombre()); producto.setMarca(dto.getMarca()); producto.setModelo(dto.getModelo()); producto.setPrecio(dto.getPrecio()); producto.setImagenUrl(dto.getImagenUrl()); producto.setCategoriaId(dto.getCategoriaId()); producto.setEstado(dto.getEstado()); }
+    private void copiarDatos(ProductoUpdateDTO dto, Producto producto) { 
+        producto.setNombre(dto.getNombre()); 
+        producto.setMarca(dto.getMarca()); 
+        producto.setModelo(dto.getModelo()); 
+        producto.setPrecio(dto.getPrecio());
+         producto.setCategoriaId(dto.getCategoriaId()); 
+         producto.setEstado(dto.getEstado()); 
+        }
 
     
-    private ProductoResponseDTO toResponse(Producto producto) { return ProductoResponseDTO.builder().id(producto.getId()).nombre(producto.getNombre()).marca(producto.getMarca()).modelo(producto.getModelo()).precio(producto.getPrecio()).imagenUrl(producto.getImagenUrl()).categoriaId(producto.getCategoriaId()).estado(producto.getEstado()).build();}
+    private ProductoResponseDTO toResponse(Producto producto) { 
+        return ProductoResponseDTO.builder()
+        .id(producto.getId())
+        .nombre(producto.getNombre())
+        .marca(producto.getMarca())
+        .modelo(producto.getModelo())
+        .precio(producto.getPrecio())
+        .categoriaId(producto.getCategoriaId())
+        .estado(producto.getEstado())
+        .build();}
     }
