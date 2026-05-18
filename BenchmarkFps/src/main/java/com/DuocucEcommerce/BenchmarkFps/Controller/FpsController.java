@@ -19,5 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class FpsController {
     private final FpsService service;
     @PostMapping("/estimar")
-    public ResponseEntity<EstimacionFPSResponseDTO> estimar(@Valid @RequestBody EstimacionRequestDTO dto) { return ResponseEntity.ok(service.estimar(dto)); }
+    public ResponseEntity<EstimacionFPSResponseDTO> estimar(@Valid @RequestBody EstimacionRequestDTO dto) { 
+        return ResponseEntity.ok(service.estimar(dto)); 
+    }
 }

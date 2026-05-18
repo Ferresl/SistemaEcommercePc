@@ -28,13 +28,23 @@ public class VideojuegoController {
     private final VideojuegoService service;
 
     @GetMapping
-    public ResponseEntity<List<VideojuegoResponseDTO>> listar() { return ResponseEntity.ok(service.listar()); }
+    public ResponseEntity<List<VideojuegoResponseDTO>> listar() { 
+        return ResponseEntity.ok(service.listar()); 
+    }
     @GetMapping("/{id}")
-    public ResponseEntity<VideojuegoResponseDTO> buscarPorId(@PathVariable Integer id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    public ResponseEntity<VideojuegoResponseDTO> buscarPorId(@PathVariable Integer id) { 
+        return ResponseEntity.ok(service.buscarPorId(id)); 
+    }
     @PostMapping
-    public ResponseEntity<VideojuegoResponseDTO> crear(@Valid @RequestBody VideojuegoCreateDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); }
+    public ResponseEntity<VideojuegoResponseDTO> crear(@Valid @RequestBody VideojuegoCreateDTO dto) { 
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
+    }
     @PutMapping("/{id}")
-    public ResponseEntity<VideojuegoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody VideojuegoUpdateDTO dto) { return ResponseEntity.ok(service.actualizar(id, dto)); }
+    public ResponseEntity<VideojuegoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody VideojuegoUpdateDTO dto) { 
+        return ResponseEntity.ok(service.actualizar(id, dto)); 
+    }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { service.eliminar(id); return ResponseEntity.noContent().build(); }
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { service.eliminar(id); 
+        return ResponseEntity.noContent().build(); 
+    }
 }

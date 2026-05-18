@@ -1,7 +1,7 @@
 package com.DuocucEcommerce.Compatibilidad.Service;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,8 @@ import com.DuocucEcommerce.Compatibilidad.Exception.ResourceNotFoundException;
 import com.DuocucEcommerce.Compatibilidad.Model.RecomendacionComponente;
 import com.DuocucEcommerce.Compatibilidad.Repository.RecomendacionComponenteRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class RecomendacionComponenteService {
@@ -20,9 +22,13 @@ public class RecomendacionComponenteService {
     
     private final RecomendacionComponenteRepository repository;
 
-    public List<RecomendacionComponenteResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<RecomendacionComponenteResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
     
-    public RecomendacionComponenteResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public RecomendacionComponenteResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
     
     public RecomendacionComponenteResponseDTO crear(RecomendacionComponenteCreateDTO dto) {
         log.info("Creando recomendacion componente");
@@ -37,7 +43,9 @@ public class RecomendacionComponenteService {
         copiarDatos(dto, recomendacionComponente);
         return toResponse(repository.save(recomendacionComponente));
     }
-    public void eliminar(Integer id) { repository.delete(obtenerEntidad(id)); }
+    public void eliminar(Integer id) { 
+        repository.delete(obtenerEntidad(id)); 
+    }
     
     private RecomendacionComponente obtenerEntidad(Integer id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("RecomendacionComponente no encontrado con id " + id));

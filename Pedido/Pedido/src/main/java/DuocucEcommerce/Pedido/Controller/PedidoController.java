@@ -27,31 +27,38 @@ import lombok.RequiredArgsConstructor;
 public class PedidoController {
     private final PedidoService service;
 
-    @GetMapping public ResponseEntity<List<PedidoResponseDTO>> listar() { 
+    @GetMapping 
+    public ResponseEntity<List<PedidoResponseDTO>> listar() { 
         return ResponseEntity.ok(service.listar()); 
     }
     
-    @GetMapping("/{id}") public ResponseEntity<PedidoResponseDTO> buscarPorId(@PathVariable Integer id) { 
+    @GetMapping("/{id}") 
+    public ResponseEntity<PedidoResponseDTO> buscarPorId(@PathVariable Integer id) { 
         return ResponseEntity.ok(service.buscarPorId(id)); 
     }
     
-    @GetMapping("/usuario/{usuarioId}") public ResponseEntity<List<PedidoResponseDTO>> listarPorUsuario(@PathVariable Integer usuarioId) { 
+    @GetMapping("/usuario/{usuarioId}") 
+    public ResponseEntity<List<PedidoResponseDTO>> listarPorUsuario(@PathVariable Integer usuarioId) { 
         return ResponseEntity.ok(service.listarPorUsuario(usuarioId)); 
     }
     
-     @PostMapping public ResponseEntity<PedidoResponseDTO> crear(@Valid @RequestBody PedidoCreateDTO dto) { 
+     @PostMapping 
+     public ResponseEntity<PedidoResponseDTO> crear(@Valid @RequestBody PedidoCreateDTO dto) { 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
     }
     
-    @PutMapping("/{id}") public ResponseEntity<PedidoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody PedidoUpdateDTO dto) { 
+    @PutMapping("/{id}") 
+    public ResponseEntity<PedidoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody PedidoUpdateDTO dto) { 
         return ResponseEntity.ok(service.actualizar(id, dto)); 
     }
     
-    @PutMapping("/{id}/estado") public ResponseEntity<PedidoResponseDTO> cambiarEstado(@PathVariable Integer id, @Valid @RequestBody EstadoPedidoUpdateDTO dto) { 
+    @PutMapping("/{id}/estado") 
+    public ResponseEntity<PedidoResponseDTO> cambiarEstado(@PathVariable Integer id, @Valid @RequestBody EstadoPedidoUpdateDTO dto) { 
         return ResponseEntity.ok(service.cambiarEstado(id, dto)); 
     }
     
-    @DeleteMapping("/{id}") public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
+    @DeleteMapping("/{id}") 
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
         service.eliminar(id); 
         return ResponseEntity.noContent().build(); 
     }

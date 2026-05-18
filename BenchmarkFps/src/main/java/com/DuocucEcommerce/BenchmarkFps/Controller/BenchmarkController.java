@@ -28,13 +28,23 @@ public class BenchmarkController {
     private final BenchmarkService service;
 
     @GetMapping
-    public ResponseEntity<List<BenchmarkResponseDTO>> listar() { return ResponseEntity.ok(service.listar()); }
+    public ResponseEntity<List<BenchmarkResponseDTO>> listar() { 
+        return ResponseEntity.ok(service.listar()); 
+    }
     @GetMapping("/{id}")
-    public ResponseEntity<BenchmarkResponseDTO> buscarPorId(@PathVariable Integer id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    public ResponseEntity<BenchmarkResponseDTO> buscarPorId(@PathVariable Integer id) { 
+        return ResponseEntity.ok(service.buscarPorId(id)); 
+    }
     @PostMapping
-    public ResponseEntity<BenchmarkResponseDTO> crear(@Valid @RequestBody BenchmarkCreateDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); }
+    public ResponseEntity<BenchmarkResponseDTO> crear(@Valid @RequestBody BenchmarkCreateDTO dto) { 
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
+    }
     @PutMapping("/{id}")
-    public ResponseEntity<BenchmarkResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody BenchmarkUpdateDTO dto) { return ResponseEntity.ok(service.actualizar(id, dto)); }
+    public ResponseEntity<BenchmarkResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody BenchmarkUpdateDTO dto) { 
+        return ResponseEntity.ok(service.actualizar(id, dto)); 
+    }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { service.eliminar(id); return ResponseEntity.noContent().build(); }
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { service.eliminar(id); 
+        return ResponseEntity.noContent().build(); 
+    }
 }

@@ -26,27 +26,34 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioController {
     private final UsuarioService service;
     
-    @GetMapping public ResponseEntity<List<UsuarioResponseDTO>> listar() { 
+    @GetMapping 
+    public ResponseEntity<List<UsuarioResponseDTO>> listar() { 
         return ResponseEntity.ok(service.listar()); 
     }
     
-    @GetMapping("/{id}") public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Integer id) { 
+    @GetMapping("/{id}") 
+    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Integer id) { 
         return ResponseEntity.ok(service.buscarPorId(id)); 
     }
     
-    @GetMapping("/email/{email}") public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) { 
+    @GetMapping("/email/{email}") 
+    public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) { 
         return ResponseEntity.ok(service.buscarPorEmail(email)); 
     }
     
-    @PostMapping public ResponseEntity<UsuarioResponseDTO> crear(@Valid @RequestBody UsuarioCreateDTO dto) { 
+    @PostMapping 
+    public ResponseEntity<UsuarioResponseDTO> crear(@Valid @RequestBody UsuarioCreateDTO dto) { 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
     }
     
-    @PutMapping("/{id}") public ResponseEntity<UsuarioResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody UsuarioUpdateDTO dto) { 
+    @PutMapping("/{id}") 
+    public ResponseEntity<UsuarioResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody UsuarioUpdateDTO dto) { 
         return ResponseEntity.ok(service.actualizar(id, dto)); 
     }
     
-    @DeleteMapping("/{id}") public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
+    @DeleteMapping("/{id}") 
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
         service.eliminar(id); 
-        return ResponseEntity.noContent().build(); }
+        return ResponseEntity.noContent().build(); 
+    }
 }

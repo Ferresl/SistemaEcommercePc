@@ -28,13 +28,28 @@ public class CategoriaController {
     private final CategoriaService service;
 
     @GetMapping
-    public ResponseEntity<List<CategoriaResponseDTO>> listar() { return ResponseEntity.ok(service.listar()); }
+    public ResponseEntity<List<CategoriaResponseDTO>> listar() { 
+        return ResponseEntity.ok(service.listar()); 
+    }
+    
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaResponseDTO> buscarPorId(@PathVariable Integer id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    public ResponseEntity<CategoriaResponseDTO> buscarPorId(@PathVariable Integer id) { 
+        return ResponseEntity.ok(service.buscarPorId(id)); 
+    }
+    
     @PostMapping
-    public ResponseEntity<CategoriaResponseDTO> crear(@Valid @RequestBody CategoriaCreateDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); }
+    public ResponseEntity<CategoriaResponseDTO> crear(@Valid @RequestBody CategoriaCreateDTO dto) { 
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
+    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody CategoriaUpdateDTO dto) { return ResponseEntity.ok(service.actualizar(id, dto)); }
+    public ResponseEntity<CategoriaResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody CategoriaUpdateDTO dto) { 
+        return ResponseEntity.ok(service.actualizar(id, dto)); 
+    }
+    
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { service.eliminar(id); return ResponseEntity.noContent().build(); }
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
+        service.eliminar(id); 
+        return ResponseEntity.noContent().build(); 
+    }
 }

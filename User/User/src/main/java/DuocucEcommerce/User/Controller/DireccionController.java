@@ -26,27 +26,33 @@ import lombok.RequiredArgsConstructor;
 public class DireccionController {
     private final DireccionService service;
     
-    @GetMapping public ResponseEntity<List<DireccionResponseDTO>> listar() { 
+    @GetMapping 
+    public ResponseEntity<List<DireccionResponseDTO>> listar() { 
         return ResponseEntity.ok(service.listar()); 
     }
     
-    @GetMapping("/{id}") public ResponseEntity<DireccionResponseDTO> buscarPorId(@PathVariable Integer id) { 
+    @GetMapping("/{id}") 
+    public ResponseEntity<DireccionResponseDTO> buscarPorId(@PathVariable Integer id) { 
         return ResponseEntity.ok(service.buscarPorId(id)); 
     }
     
-    @GetMapping("/usuario/{usuarioId}") public ResponseEntity<List<DireccionResponseDTO>> listarPorUsuario(@PathVariable Integer usuarioId) { 
+    @GetMapping("/usuario/{usuarioId}") 
+    public ResponseEntity<List<DireccionResponseDTO>> listarPorUsuario(@PathVariable Integer usuarioId) { 
         return ResponseEntity.ok(service.listarPorUsuario(usuarioId)); 
     }
     
-    @PostMapping public ResponseEntity<DireccionResponseDTO> crear(@Valid @RequestBody DireccionCreateDTO dto) { 
+    @PostMapping 
+    public ResponseEntity<DireccionResponseDTO> crear(@Valid @RequestBody DireccionCreateDTO dto) { 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
     }
     
-    @PutMapping("/{id}") public ResponseEntity<DireccionResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody DireccionUpdateDTO dto) {
+    @PutMapping("/{id}") 
+    public ResponseEntity<DireccionResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody DireccionUpdateDTO dto) {
         return ResponseEntity.ok(service.actualizar(id, dto)); 
     }
     
-    @DeleteMapping("/{id}") public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
+    @DeleteMapping("/{id}") 
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
         service.eliminar(id); 
         return ResponseEntity.noContent().build(); 
     }

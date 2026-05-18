@@ -21,8 +21,15 @@ public class CategoriaService {
     private static final Logger log = LoggerFactory.getLogger(CategoriaService.class);
     private final CategoriaRepository repository;
 
-    public List<CategoriaResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
-    public CategoriaResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    
+    public List<CategoriaResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
+    
+    public CategoriaResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
+    
     public CategoriaResponseDTO crear(CategoriaCreateDTO dto) {
         log.info("Creando categoria");
         Categoria categoria = new Categoria();

@@ -21,8 +21,15 @@ public class ItemCarritoService {
     private static final Logger log = LoggerFactory.getLogger(ItemCarritoService.class);
     private final ItemCarritoRepository repository;
 
-    public List<ItemCarritoResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
-    public ItemCarritoResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    
+    public List<ItemCarritoResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
+    
+    public ItemCarritoResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
+    
     public ItemCarritoResponseDTO crear(ItemCarritoCreateDTO dto) {
         log.info("Creando item carrito");
         ItemCarrito itemCarrito = new ItemCarrito();

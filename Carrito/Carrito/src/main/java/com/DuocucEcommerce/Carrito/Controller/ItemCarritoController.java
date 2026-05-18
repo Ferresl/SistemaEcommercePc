@@ -28,13 +28,28 @@ public class ItemCarritoController {
     private final ItemCarritoService service;
 
     @GetMapping
-    public ResponseEntity<List<ItemCarritoResponseDTO>> listar() { return ResponseEntity.ok(service.listar()); }
+    public ResponseEntity<List<ItemCarritoResponseDTO>> listar() { 
+        return ResponseEntity.ok(service.listar()); 
+    }
+    
     @GetMapping("/{id}")
-    public ResponseEntity<ItemCarritoResponseDTO> buscarPorId(@PathVariable Integer id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    public ResponseEntity<ItemCarritoResponseDTO> buscarPorId(@PathVariable Integer id) { 
+        return ResponseEntity.ok(service.buscarPorId(id)); 
+    }
+    
     @PostMapping
-    public ResponseEntity<ItemCarritoResponseDTO> crear(@Valid @RequestBody ItemCarritoCreateDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); }
+    public ResponseEntity<ItemCarritoResponseDTO> crear(@Valid @RequestBody ItemCarritoCreateDTO dto) { 
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
+    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity<ItemCarritoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody ItemCarritoUpdateDTO dto) { return ResponseEntity.ok(service.actualizar(id, dto)); }
+    public ResponseEntity<ItemCarritoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody ItemCarritoUpdateDTO dto) { 
+        return ResponseEntity.ok(service.actualizar(id, dto)); 
+    }
+    
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { service.eliminar(id); return ResponseEntity.noContent().build(); }
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
+        service.eliminar(id); 
+        return ResponseEntity.noContent().build(); 
+    }
 }

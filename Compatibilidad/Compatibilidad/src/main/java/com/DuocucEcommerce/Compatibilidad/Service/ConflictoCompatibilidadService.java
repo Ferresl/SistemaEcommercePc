@@ -1,7 +1,7 @@
 package com.DuocucEcommerce.Compatibilidad.Service;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,8 @@ import com.DuocucEcommerce.Compatibilidad.Exception.ResourceNotFoundException;
 import com.DuocucEcommerce.Compatibilidad.Model.ConflictoCompatibilidad;
 import com.DuocucEcommerce.Compatibilidad.Repository.ConflictoCompatibilidadRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class ConflictoCompatibilidadService {
@@ -20,9 +22,13 @@ public class ConflictoCompatibilidadService {
     
     private final ConflictoCompatibilidadRepository repository;
 
-    public List<ConflictoCompatibilidadResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<ConflictoCompatibilidadResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
     
-    public ConflictoCompatibilidadResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public ConflictoCompatibilidadResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
     
     public ConflictoCompatibilidadResponseDTO crear(ConflictoCompatibilidadCreateDTO dto) {
         log.info("Creando conflicto compatibilidad");
