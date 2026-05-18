@@ -1,0 +1,13 @@
+package com.DuocucEcommerce.BenchmarkFps;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BenchmarkFpsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BenchmarkFpsApplication.class, args);
+	}
+
+}
