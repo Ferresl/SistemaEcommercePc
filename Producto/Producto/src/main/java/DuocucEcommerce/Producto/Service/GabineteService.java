@@ -2,7 +2,7 @@ package DuocucEcommerce.Producto.Service;
 
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,7 @@ import DuocucEcommerce.Producto.Dto.GabineteDTO.GabineteUpdateDTO;
 import DuocucEcommerce.Producto.Exception.ResourceNotFoundException;
 import DuocucEcommerce.Producto.Model.Gabinete;
 import DuocucEcommerce.Producto.Repository.GabineteRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +22,12 @@ public class GabineteService {
    
     private final GabineteRepository repository;
    
-    public List<GabineteResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<GabineteResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
    
-    public GabineteResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public GabineteResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); }
    
     public GabineteResponseDTO buscarPorProductoId(Integer productoId) {
         return repository.findByProductoId(productoId).map(this::toResponse).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada para producto " + productoId));
@@ -40,9 +44,13 @@ public class GabineteService {
         return toResponse(repository.save(gabinete));
     }
     
-    public void eliminar(Integer id) { repository.delete(obtenerEntidad(id)); }
+    public void eliminar(Integer id) { 
+        repository.delete(obtenerEntidad(id)); 
+    }
     
-    private Gabinete obtenerEntidad(Integer id) { return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada con id " + id)); }
+    private Gabinete obtenerEntidad(Integer id) { 
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada con id " + id)); 
+    }
     
     private void copiarDatos(GabineteCreateDTO dto, Gabinete gabinete) {
         gabinete.setProductoId(dto.getProductoId());

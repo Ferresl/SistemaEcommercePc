@@ -2,18 +2,16 @@ package DuocucEcommerce.Producto.Service;
 
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import DuocucEcommerce.Producto.Dto.PlacaMadreDTO.PlacaMadreCreateDTO;
 import DuocucEcommerce.Producto.Dto.PlacaMadreDTO.PlacaMadreResponseDTO;
 import DuocucEcommerce.Producto.Dto.PlacaMadreDTO.PlacaMadreUpdateDTO;
 import DuocucEcommerce.Producto.Exception.ResourceNotFoundException;
 import DuocucEcommerce.Producto.Model.PlacaMadre;
 import DuocucEcommerce.Producto.Repository.PlacaMadreRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +20,13 @@ public class PlacaMadreService {
    
     private final PlacaMadreRepository repository;
    
-    public List<PlacaMadreResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<PlacaMadreResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
    
-    public PlacaMadreResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public PlacaMadreResponseDTO buscarPorId(Integer id) {
+        return toResponse(obtenerEntidad(id)); 
+    }
    
     public PlacaMadreResponseDTO buscarPorProductoId(Integer productoId) {
         return repository.findByProductoId(productoId).map(this::toResponse).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada para producto " + productoId));
@@ -41,9 +43,13 @@ public class PlacaMadreService {
         return toResponse(repository.save(placaMadre));
     }
    
-    public void eliminar(Integer id) { repository.delete(obtenerEntidad(id)); }
+    public void eliminar(Integer id) { 
+        repository.delete(obtenerEntidad(id)); 
+    }
    
-    private PlacaMadre obtenerEntidad(Integer id) { return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada con id " + id)); }
+    private PlacaMadre obtenerEntidad(Integer id) { 
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada con id " + id)); 
+    }
    
    
     private void copiarDatos(PlacaMadreCreateDTO dto, PlacaMadre placaMadre) {

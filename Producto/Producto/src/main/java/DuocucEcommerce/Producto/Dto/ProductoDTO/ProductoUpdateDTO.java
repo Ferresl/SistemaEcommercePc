@@ -33,9 +33,6 @@ public class ProductoUpdateDTO {
     @Positive(message = "El campo precio debe ser mayor a 0")
     private BigDecimal precio;
 
-    @Size(max = 255)
-    private String imagenUrl;
-
     @NotNull(message = "El campo categoriaId es obligatorio")
     private Integer categoriaId;
 

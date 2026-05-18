@@ -24,22 +24,28 @@ public class ProductoService {
     private final ProductoRepository repository;
     private final CategoriaClient categoriaClient;
 
-    public List<ProductoResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<ProductoResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
    
    
-    public ProductoResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public ProductoResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
    
    
     public ProductoResponseDTO crear(ProductoCreateDTO dto) {
         log.info("Creando producto: {}", dto.getNombre());
         validarPrecio(dto.getPrecio()); categoriaClient.obtenerPorId(dto.getCategoriaId());
-        Producto producto = new Producto(); copiarDatos(dto, producto); return toResponse(repository.save(producto));
+        Producto producto = new Producto(); copiarDatos(dto, producto); 
+        return toResponse(repository.save(producto));
     }
    
    
     public ProductoResponseDTO actualizar(Integer id, ProductoUpdateDTO dto) {
         validarPrecio(dto.getPrecio()); categoriaClient.obtenerPorId(dto.getCategoriaId());
-        Producto producto = obtenerEntidad(id); copiarDatos(dto, producto); return toResponse(repository.save(producto));
+        Producto producto = obtenerEntidad(id); copiarDatos(dto, producto); 
+        return toResponse(repository.save(producto));
     }
    
    

@@ -22,7 +22,6 @@ public class ProductoResponseDTO {
 
     private BigDecimal precio;
 
-    private String imagenUrl;
 
     private Integer categoriaId;
 

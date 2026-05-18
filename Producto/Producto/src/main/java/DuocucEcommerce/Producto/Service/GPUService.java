@@ -23,9 +23,13 @@ public class GPUService {
     
     private final GPURepository repository;
     
-    public List<GPUResponseDTO> listar() { return repository.findAll().stream().map(this::toResponse).toList(); }
+    public List<GPUResponseDTO> listar() { 
+        return repository.findAll().stream().map(this::toResponse).toList(); 
+    }
     
-    public GPUResponseDTO buscarPorId(Integer id) { return toResponse(obtenerEntidad(id)); }
+    public GPUResponseDTO buscarPorId(Integer id) { 
+        return toResponse(obtenerEntidad(id)); 
+    }
     
     public GPUResponseDTO buscarPorProductoId(Integer productoId) {
         return repository.findByProductoId(productoId).map(this::toResponse).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada para producto " + productoId));
@@ -41,20 +45,25 @@ public class GPUService {
         copiarDatos(dto, gpu);
         return toResponse(repository.save(gpu));
     }
+    
     public void eliminar(Integer id) { repository.delete(obtenerEntidad(id)); }
+    
     private GPU obtenerEntidad(Integer id) { return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ficha tecnica no encontrada con id " + id)); }
+    
     private void copiarDatos(GPUCreateDTO dto, GPU gpu) {
         gpu.setProductoId(dto.getProductoId());
         gpu.setMemoriaGb(dto.getMemoriaGb());
         gpu.setLargoMm(dto.getLargoMm());
         gpu.setTdpWatts(dto.getTdpWatts());
     }
+   
     private void copiarDatos(GPUUpdateDTO dto, GPU gpu) {
         gpu.setProductoId(dto.getProductoId());
         gpu.setMemoriaGb(dto.getMemoriaGb());
         gpu.setLargoMm(dto.getLargoMm());
         gpu.setTdpWatts(dto.getTdpWatts());
     }
+   
     private GPUResponseDTO toResponse(GPU gpu) {
         return GPUResponseDTO.builder().id(gpu.getId())
                 .productoId(gpu.getProductoId())
