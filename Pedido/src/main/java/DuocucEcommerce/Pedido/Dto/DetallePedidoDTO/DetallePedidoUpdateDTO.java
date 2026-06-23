@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Datos permitidos para actualizar detalle pedido.")
+@Schema(description = "Datos permitidos para actualizar detalle del pedido.")
 public class DetallePedidoUpdateDTO {
 
     @NotNull(message = "El campo pedidoId es obligatorio")
@@ -25,12 +25,12 @@ public class DetallePedidoUpdateDTO {
 
     @NotNull(message = "El campo cantidad es obligatorio")
     @Min(value = 1, message = "El campo cantidad debe ser mayor a 0")
-    @Schema(description = "Cantidad de unidades.", example = "2")
+    @Schema(description = "Cantidad de unidades solicitadas.", example = "2")
     private Integer cantidad;
 
     @NotNull(message = "El campo precioUnitario es obligatorio")
     @Positive(message = "El campo precioUnitario debe ser mayor a 0")
-    @Schema(description = "Valor de precio unitario.", example = "249990")
+    @Schema(description = "Precio unitario del producto al momento del pedido.", example = "249990")
     private BigDecimal precioUnitario;
 
 }

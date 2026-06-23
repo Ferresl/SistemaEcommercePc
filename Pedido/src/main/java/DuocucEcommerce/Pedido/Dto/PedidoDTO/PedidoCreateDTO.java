@@ -24,11 +24,11 @@ public class PedidoCreateDTO {
     private Integer usuarioId;
     
     @NotNull(message = "La direccion es obligatoria")
-    @Schema(description = "Identificador de direccion asociado.", example = "1")
+    @Schema(description = "Identificador de la direccion de entrega.", example = "1")
     private Integer direccionId;
     
     @Valid
     @NotEmpty(message = "Debe agregar productos al pedido")
-    @Schema(description = "Valor de detalles.", example = "Ejemplo")
+    @Schema(description = "Detalle de productos incluidos en el pedido.", example = "[]")
     private List<DetallePedidoRequestDTO> detalles;
 }

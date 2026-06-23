@@ -20,10 +20,10 @@ public class PedidoUpdateDTO {
     private Integer usuarioId;
     
     @NotNull(message = "La direccion es obligatoria")
-    @Schema(description = "Identificador de direccion asociado.", example = "1")
+    @Schema(description = "Identificador de la direccion de entrega.", example = "1")
     private Integer direccionId;
     
     @NotBlank(message = "El estado es obligatorio")
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado actual del pedido.", example = "PENDIENTE")
     private String estado;
 }

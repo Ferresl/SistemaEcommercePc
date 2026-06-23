@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Datos de entrada para detalle pedido.")
+@Schema(description = "Datos de entrada para detalle del pedido.")
 public class DetallePedidoRequestDTO {
    
     @NotNull(message = "El producto es obligatorio")
@@ -19,6 +19,6 @@ public class DetallePedidoRequestDTO {
    
     @NotNull(message = "La cantidad es obligatoria")
     @Min(value = 1, message = "La cantidad debe ser mayor a 0")
-    @Schema(description = "Cantidad de unidades.", example = "2")
+    @Schema(description = "Cantidad de unidades solicitadas.", example = "2")
     private Integer cantidad;
 }

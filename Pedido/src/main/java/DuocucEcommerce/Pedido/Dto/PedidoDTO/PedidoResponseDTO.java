@@ -23,21 +23,21 @@ public class PedidoResponseDTO {
     @Schema(description = "Identificador del usuario asociado.", example = "1")
     private Integer usuarioId;
    
-    @Schema(description = "Identificador de direccion asociado.", example = "1")
+    @Schema(description = "Identificador de la direccion de entrega.", example = "1")
     private Integer direccionId;
    
-    @Schema(description = "Subtotal de la linea o item.", example = "399990")
+    @Schema(description = "Subtotal calculado antes del total final.", example = "399990")
     private BigDecimal subtotal;
    
     @Schema(description = "Monto total calculado.", example = "799990")
     private BigDecimal total;
    
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado actual del pedido.", example = "PENDIENTE")
     private String estado;
    
-    @Schema(description = "Valor de codigo confirmacion.", example = "Ejemplo")
+    @Schema(description = "Codigo de confirmacion del pedido.", example = "PED-20260623-0001")
     private String codigoConfirmacion;
    
-    @Schema(description = "Valor de detalles.", example = "Ejemplo")
+    @Schema(description = "Detalle de productos incluidos en el pedido.", example = "[]")
     private List<DetallePedidoResponseDTO> detalles;
 }

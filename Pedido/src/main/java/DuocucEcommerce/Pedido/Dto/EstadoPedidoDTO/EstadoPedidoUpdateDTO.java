@@ -11,11 +11,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Datos permitidos para actualizar estado pedido.")
+@Schema(description = "Datos permitidos para actualizar estado del pedido.")
 public class EstadoPedidoUpdateDTO {
     
     @NotBlank(message = "El estado es obligatorio")
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado actual del pedido.", example = "PENDIENTE")
     private String estado;
 
 }
