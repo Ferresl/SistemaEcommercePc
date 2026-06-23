@@ -22,10 +22,10 @@ public class NotificacionResponseDTO {
     @Schema(description = "Titulo de la notificacion.", example = "Pedido confirmado")
     private String titulo;
 
-    @Schema(description = "Mensaje devuelto por la operacion.", example = "Operacion realizada correctamente")
+    @Schema(description = "Contenido del mensaje de la notificacion.", example = "Tu pedido fue confirmado")
     private String mensaje;
 
-    @Schema(description = "Tipo de notificacion o clasificacion interna.", example = "INFO")
+    @Schema(description = "Tipo de notificacion enviada.", example = "PEDIDO")
     private String tipo;
 
     @Schema(description = "Indica si la notificacion ya fue leida.", example = "false")

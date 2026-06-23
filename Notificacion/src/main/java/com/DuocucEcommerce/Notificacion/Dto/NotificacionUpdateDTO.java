@@ -24,11 +24,11 @@ public class NotificacionUpdateDTO {
     private String titulo;
 
     @NotBlank(message = "El campo mensaje es obligatorio")
-    @Schema(description = "Mensaje devuelto por la operacion.", example = "Operacion realizada correctamente")
+    @Schema(description = "Contenido del mensaje de la notificacion.", example = "Tu pedido fue confirmado")
     private String mensaje;
 
     @NotBlank(message = "El campo tipo es obligatorio")
-    @Schema(description = "Tipo de notificacion o clasificacion interna.", example = "INFO")
+    @Schema(description = "Tipo de notificacion enviada.", example = "PEDIDO")
     private String tipo;
 
     @NotNull(message = "El campo leida es obligatorio")
