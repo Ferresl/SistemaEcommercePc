@@ -17,7 +17,7 @@ public class UsuarioResponseDTO {
     @Schema(description = "Identificador unico del registro.", example = "1")
     private Integer id;
 
-    @Schema(description = "Nombre del registro o del usuario.", example = "Juan")
+    @Schema(description = "Nombre del usuario.", example = "Juan")
     private String nombre;
 
     @Schema(description = "Apellido del usuario.", example = "Ferreira")
@@ -26,13 +26,13 @@ public class UsuarioResponseDTO {
     @Schema(description = "Correo electronico del usuario.", example = "juan.ferreira@correo.cl")
     private String email;
 
-    @Schema(description = "Telefono de contacto.", example = "+56912345678")
+    @Schema(description = "Telefono de contacto del usuario.", example = "+56912345678")
     private String telefono;
 
     @Schema(description = "Rol asignado al usuario.", example = "CLIENTE")
     private RolUsuario rol;
 
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado de la cuenta del usuario.", example = "ACTIVO")
     private String estado;
 
 }

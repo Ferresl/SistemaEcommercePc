@@ -12,10 +12,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @AllArgsConstructor
 @Schema(description = "Respuesta usada cuando la API informa un error.")
 public class ErrorResponseDTO {
-    @Schema(description = "Mensaje devuelto por la operacion.", example = "Operacion realizada correctamente")
+    @Schema(description = "Detalle del error retornado por la API.", example = "No se encontro el recurso solicitado")
     private String mensaje;
-    @Schema(description = "Valor de status.", example = "1")
+    @Schema(description = "Codigo HTTP asociado al error.", example = "404")
     private Integer status;
-    @Schema(description = "Valor de timestamp.", example = "Ejemplo")
+    @Schema(description = "Fecha y hora en que se genero la respuesta.", example = "2026-06-23T15:30:00")
     private LocalDateTime timestamp;
 }

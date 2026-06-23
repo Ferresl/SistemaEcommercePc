@@ -37,7 +37,7 @@ public class DireccionResponseDTO {
     @Schema(description = "Referencia adicional de ubicacion.", example = "Frente al metro")
     private String referencia;
 
-    @Schema(description = "Indica si es la direccion principal.", example = "true")
+    @Schema(description = "Indica si es la direccion principal del usuario.", example = "true")
     private Boolean principal;
 
 }

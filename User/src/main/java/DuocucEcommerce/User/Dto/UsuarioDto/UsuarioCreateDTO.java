@@ -22,7 +22,7 @@ public class UsuarioCreateDTO {
 
     @NotBlank(message = "El campo nombre es obligatorio")
     @Size(min = 2, max = 60)
-    @Schema(description = "Nombre del registro o del usuario.", example = "Juan")
+    @Schema(description = "Nombre del usuario.", example = "Juan")
     private String nombre;
 
     @NotBlank(message = "El campo apellido es obligatorio")
@@ -36,7 +36,7 @@ public class UsuarioCreateDTO {
     private String email;
 
     @Size(max = 20)
-    @Schema(description = "Telefono de contacto.", example = "+56912345678")
+    @Schema(description = "Telefono de contacto del usuario.", example = "+56912345678")
     private String telefono;
 
     @NotNull(message = "El campo rol es obligatorio")
@@ -44,7 +44,7 @@ public class UsuarioCreateDTO {
     private RolUsuario rol;
 
     @NotBlank(message = "El campo estado es obligatorio")
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado de la cuenta del usuario.", example = "ACTIVO")
     private String estado;
 
 }

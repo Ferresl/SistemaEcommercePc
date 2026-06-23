@@ -42,7 +42,7 @@ public class DireccionCreateDTO {
     private String referencia;
 
     @NotNull(message = "El campo principal es obligatorio")
-    @Schema(description = "Indica si es la direccion principal.", example = "true")
+    @Schema(description = "Indica si es la direccion principal del usuario.", example = "true")
     private Boolean principal;
 
 }
