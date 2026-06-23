@@ -10,20 +10,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Schema(description = "Datos necesarios para crear pedido.")
 public class PedidoCreateDTO {
     
     @NotNull(message = "El usuario es obligatorio")
+    @Schema(description = "Identificador del usuario asociado.", example = "1")
     private Integer usuarioId;
     
     @NotNull(message = "La direccion es obligatoria")
+    @Schema(description = "Identificador de direccion asociado.", example = "1")
     private Integer direccionId;
     
     @Valid
     @NotEmpty(message = "Debe agregar productos al pedido")
+    @Schema(description = "Valor de detalles.", example = "Ejemplo")
     private List<DetallePedidoRequestDTO> detalles;
 }
