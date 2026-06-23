@@ -17,7 +17,7 @@ public class ProductoCreateDTO {
 
     @NotBlank(message = "El campo nombre es obligatorio")
     @Size(min = 3, max = 80)
-    @Schema(description = "Nombre del registro o del usuario.", example = "Juan")
+    @Schema(description = "Nombre comercial del producto.", example = "Procesador Ryzen 5 7600")
     private String nombre;
 
     @NotBlank(message = "El campo marca es obligatorio")
@@ -40,7 +40,7 @@ public class ProductoCreateDTO {
     private Integer categoriaId;
 
     @NotBlank(message = "El campo estado es obligatorio")
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado de disponibilidad del producto.", example = "ACTIVO")
     private String estado;
 
 }

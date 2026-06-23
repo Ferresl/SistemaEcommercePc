@@ -21,10 +21,10 @@ public class GabineteResponseDTO {
     @Schema(description = "Identificador del producto asociado.", example = "1")
     private Integer productoId;
 
-    @Schema(description = "Valor de formato soportado.", example = "Ejemplo")
+    @Schema(description = "Formato de placa madre soportado por el gabinete.", example = "ATX")
     private String formatoSoportado;
 
-    @Schema(description = "Valor de largo max gpu mm.", example = "1")
+    @Schema(description = "Largo maximo de GPU soportado por el gabinete en milimetros.", example = "330")
     private Integer largoMaxGpuMm;
 
 }

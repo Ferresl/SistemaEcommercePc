@@ -22,12 +22,12 @@ public class GabineteCreateDTO {
     private Integer productoId;
 
     @NotBlank(message = "El campo formatoSoportado es obligatorio")
-    @Schema(description = "Valor de formato soportado.", example = "Ejemplo")
+    @Schema(description = "Formato de placa madre soportado por el gabinete.", example = "ATX")
     private String formatoSoportado;
 
     @NotNull(message = "El campo largoMaxGpuMm es obligatorio")
     @Min(value = 1, message = "El campo largoMaxGpuMm debe ser mayor a 0")
-    @Schema(description = "Valor de largo max gpu mm.", example = "1")
+    @Schema(description = "Largo maximo de GPU soportado por el gabinete en milimetros.", example = "330")
     private Integer largoMaxGpuMm;
 
 }

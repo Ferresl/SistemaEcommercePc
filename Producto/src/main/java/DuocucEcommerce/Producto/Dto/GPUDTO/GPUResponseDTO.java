@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Respuesta entregada por la API para gpuresponse.")
+@Schema(description = "Respuesta entregada por la API para GPU.")
 public class GPUResponseDTO {
 
     @Schema(description = "Identificador unico del registro.", example = "1")
@@ -20,13 +20,13 @@ public class GPUResponseDTO {
     @Schema(description = "Identificador del producto asociado.", example = "1")
     private Integer productoId;
 
-    @Schema(description = "Valor de memoria gb.", example = "1")
+    @Schema(description = "Memoria dedicada de la tarjeta grafica en GB.", example = "12")
     private Integer memoriaGb;
 
-    @Schema(description = "Valor de largo mm.", example = "1")
+    @Schema(description = "Largo fisico de la tarjeta grafica en milimetros.", example = "300")
     private Integer largoMm;
 
-    @Schema(description = "Valor de tdp watts.", example = "1")
+    @Schema(description = "Consumo energetico estimado en watts.", example = "180")
     private Integer tdpWatts;
 
 }

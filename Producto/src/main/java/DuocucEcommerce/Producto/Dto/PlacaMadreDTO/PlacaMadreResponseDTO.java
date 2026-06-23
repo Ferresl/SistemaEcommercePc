@@ -23,13 +23,13 @@ public class PlacaMadreResponseDTO {
     @Schema(description = "Socket compatible del componente.", example = "AM5")
     private String socket;
 
-    @Schema(description = "Chipset principal del componente.", example = "B650")
+    @Schema(description = "Chipset principal de la placa madre.", example = "B650")
     private String chipset;
 
-    @Schema(description = "Valor de tipo ram soportada.", example = "Ejemplo")
+    @Schema(description = "Tipo de memoria RAM soportada por la placa madre.", example = "DDR5")
     private String tipoRamSoportada;
 
-    @Schema(description = "Valor de ram maxima gb.", example = "1")
+    @Schema(description = "Memoria RAM maxima soportada en GB.", example = "128")
     private Integer ramMaximaGb;
 
     @Schema(description = "Formato fisico del componente.", example = "ATX")

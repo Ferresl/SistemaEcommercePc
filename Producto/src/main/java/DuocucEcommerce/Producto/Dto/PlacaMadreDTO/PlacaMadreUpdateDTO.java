@@ -24,16 +24,16 @@ public class PlacaMadreUpdateDTO {
     private String socket;
 
     @NotBlank(message = "El campo chipset es obligatorio")
-    @Schema(description = "Chipset principal del componente.", example = "B650")
+    @Schema(description = "Chipset principal de la placa madre.", example = "B650")
     private String chipset;
 
     @NotBlank(message = "El campo tipoRamSoportada es obligatorio")
-    @Schema(description = "Valor de tipo ram soportada.", example = "Ejemplo")
+    @Schema(description = "Tipo de memoria RAM soportada por la placa madre.", example = "DDR5")
     private String tipoRamSoportada;
 
     @NotNull(message = "El campo ramMaximaGb es obligatorio")
     @Min(value = 1, message = "El campo ramMaximaGb debe ser mayor a 0")
-    @Schema(description = "Valor de ram maxima gb.", example = "1")
+    @Schema(description = "Memoria RAM maxima soportada en GB.", example = "128")
     private Integer ramMaximaGb;
 
     @NotBlank(message = "El campo formato es obligatorio")

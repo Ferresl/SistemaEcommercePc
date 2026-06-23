@@ -20,16 +20,16 @@ public class AlmacenamientoCreateDTO {
     private Integer productoId;
 
     @NotBlank(message = "El campo tipo es obligatorio")
-    @Schema(description = "Tipo de notificacion o clasificacion interna.", example = "INFO")
+    @Schema(description = "Tipo de almacenamiento.", example = "SSD")
     private String tipo;
 
     @NotNull(message = "El campo capacidadGb es obligatorio")
     @Min(value = 1, message = "El campo capacidadGb debe ser mayor a 0")
-    @Schema(description = "Valor de capacidad gb.", example = "1")
+    @Schema(description = "Capacidad del almacenamiento en GB.", example = "1000")
     private Integer capacidadGb;
 
     @NotBlank(message = "El campo interfaz es obligatorio")
-    @Schema(description = "Valor de interfaz.", example = "Ejemplo")
+    @Schema(description = "Interfaz de conexion del almacenamiento.", example = "NVMe")
     private String interfaz;
 
 }

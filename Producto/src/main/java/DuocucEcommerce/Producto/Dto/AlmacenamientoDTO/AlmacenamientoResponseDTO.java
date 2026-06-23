@@ -20,13 +20,13 @@ public class AlmacenamientoResponseDTO {
     @Schema(description = "Identificador del producto asociado.", example = "1")
     private Integer productoId;
 
-    @Schema(description = "Tipo de notificacion o clasificacion interna.", example = "INFO")
+    @Schema(description = "Tipo de almacenamiento.", example = "SSD")
     private String tipo;
 
-    @Schema(description = "Valor de capacidad gb.", example = "1")
+    @Schema(description = "Capacidad del almacenamiento en GB.", example = "1000")
     private Integer capacidadGb;
 
-    @Schema(description = "Valor de interfaz.", example = "Ejemplo")
+    @Schema(description = "Interfaz de conexion del almacenamiento.", example = "NVMe")
     private String interfaz;
 
 }

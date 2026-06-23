@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Respuesta entregada por la API para cpuresponse.")
+@Schema(description = "Respuesta entregada por la API para CPU.")
 public class CPUResponseDTO {
 
     @Schema(description = "Identificador unico del registro.", example = "1")
@@ -30,7 +30,7 @@ public class CPUResponseDTO {
     @Schema(description = "Cantidad de hilos del procesador.", example = "12")
     private Integer hilos;
 
-    @Schema(description = "Valor de tdp watts.", example = "1")
+    @Schema(description = "Consumo energetico estimado en watts.", example = "180")
     private Integer tdpWatts;
 
 }

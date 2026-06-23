@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Datos necesarios para crear gpucreate.")
+@Schema(description = "Datos necesarios para crear GPU.")
 public class GPUCreateDTO {
 
     @NotNull(message = "El campo productoId es obligatorio")
@@ -21,17 +21,17 @@ public class GPUCreateDTO {
 
     @NotNull(message = "El campo memoriaGb es obligatorio")
     @Min(value = 1, message = "El campo memoriaGb debe ser mayor a 0")
-    @Schema(description = "Valor de memoria gb.", example = "1")
+    @Schema(description = "Memoria dedicada de la tarjeta grafica en GB.", example = "12")
     private Integer memoriaGb;
 
     @NotNull(message = "El campo largoMm es obligatorio")
     @Min(value = 1, message = "El campo largoMm debe ser mayor a 0")
-    @Schema(description = "Valor de largo mm.", example = "1")
+    @Schema(description = "Largo fisico de la tarjeta grafica en milimetros.", example = "300")
     private Integer largoMm;
 
     @NotNull(message = "El campo tdpWatts es obligatorio")
     @Min(value = 1, message = "El campo tdpWatts debe ser mayor a 0")
-    @Schema(description = "Valor de tdp watts.", example = "1")
+    @Schema(description = "Consumo energetico estimado en watts.", example = "180")
     private Integer tdpWatts;
 
 }

@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Datos permitidos para actualizar cpuupdate.")
+@Schema(description = "Datos permitidos para actualizar CPU.")
 public class CPUUpdateDTO {
 
     @NotNull(message = "El campo productoId es obligatorio")
@@ -37,7 +37,7 @@ public class CPUUpdateDTO {
 
     @NotNull(message = "El campo tdpWatts es obligatorio")
     @Min(value = 1, message = "El campo tdpWatts debe ser mayor a 0")
-    @Schema(description = "Valor de tdp watts.", example = "1")
+    @Schema(description = "Consumo energetico estimado en watts.", example = "180")
     private Integer tdpWatts;
 
 }

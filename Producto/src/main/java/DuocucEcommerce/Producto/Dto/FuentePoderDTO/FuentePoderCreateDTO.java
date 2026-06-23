@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Datos necesarios para crear fuente poder.")
+@Schema(description = "Datos necesarios para crear fuente de poder.")
 public class FuentePoderCreateDTO {
 
     @NotNull(message = "El campo productoId es obligatorio")
@@ -23,15 +23,15 @@ public class FuentePoderCreateDTO {
 
     @NotNull(message = "El campo potenciaWatts es obligatorio")
     @Min(value = 1, message = "El campo potenciaWatts debe ser mayor a 0")
-    @Schema(description = "Valor de potencia watts.", example = "1")
+    @Schema(description = "Potencia nominal de la fuente de poder en watts.", example = "650")
     private Integer potenciaWatts;
 
     @NotBlank(message = "El campo certificacion es obligatorio")
-    @Schema(description = "Certificacion del componente.", example = "80 Plus Gold")
+    @Schema(description = "Certificacion de eficiencia de la fuente de poder.", example = "80 Plus Gold")
     private String certificacion;
 
     @NotNull(message = "El campo modular es obligatorio")
-    @Schema(description = "Valor de modular.", example = "true")
+    @Schema(description = "Indica si la fuente de poder es modular.", example = "true")
     private Boolean modular;
 
 }
