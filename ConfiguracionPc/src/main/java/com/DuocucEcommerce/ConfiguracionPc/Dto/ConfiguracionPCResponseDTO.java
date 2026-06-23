@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Respuesta entregada por la API para configuracion pcresponse.")
+@Schema(description = "Respuesta entregada por la API para configuracion de PC.")
 public class ConfiguracionPCResponseDTO {
 
     @Schema(description = "Identificador unico del registro.", example = "1")
@@ -21,7 +21,7 @@ public class ConfiguracionPCResponseDTO {
     @Schema(description = "Identificador del usuario asociado.", example = "1")
     private Integer usuarioId;
 
-    @Schema(description = "Nombre del registro o del usuario.", example = "Juan")
+    @Schema(description = "Nombre asignado a la configuracion de PC.", example = "PC gamer principal")
     private String nombre;
 
     @Schema(description = "Identificador del procesador seleccionado.", example = "1")
@@ -45,13 +45,13 @@ public class ConfiguracionPCResponseDTO {
     @Schema(description = "Identificador del gabinete seleccionado.", example = "1")
     private Integer gabineteId;
 
-    @Schema(description = "Valor de precio total.", example = "249990")
+    @Schema(description = "Precio total estimado de la configuracion.", example = "899990")
     private BigDecimal precioTotal;
 
-    @Schema(description = "Valor de tdp total.", example = "1")
+    @Schema(description = "Consumo total estimado de la configuracion en watts.", example = "520")
     private Integer tdpTotal;
 
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado actual de la compatibilidad o configuracion.", example = "COMPATIBLE")
     private String estado;
 
 }

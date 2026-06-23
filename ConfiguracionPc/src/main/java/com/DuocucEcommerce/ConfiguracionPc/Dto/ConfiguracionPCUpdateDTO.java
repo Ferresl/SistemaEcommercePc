@@ -12,11 +12,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Datos permitidos para actualizar configuracion pcupdate.")
+@Schema(description = "Datos permitidos para actualizar configuracion de PC.")
 public class ConfiguracionPCUpdateDTO {
     @Schema(description = "Identificador del usuario asociado.", example = "1")
     @NotNull private Integer usuarioId;
-    @Schema(description = "Nombre del registro o del usuario.", example = "Juan")
+    @Schema(description = "Nombre asignado a la configuracion de PC.", example = "PC gamer principal")
     @NotBlank private String nombre;
     @Schema(description = "Identificador del procesador seleccionado.", example = "1")
     @NotNull private Integer cpuId;
@@ -32,6 +32,6 @@ public class ConfiguracionPCUpdateDTO {
     @NotNull private Integer fuentePoderId;
     @Schema(description = "Identificador del gabinete seleccionado.", example = "1")
     @NotNull private Integer gabineteId;
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado actual de la compatibilidad o configuracion.", example = "COMPATIBLE")
     private String estado;
 }
