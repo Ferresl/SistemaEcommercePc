@@ -22,10 +22,10 @@ public class InventarioResponseDTO {
     @Schema(description = "Stock disponible para venta.", example = "15")
     private Integer stockDisponible;
 
-    @Schema(description = "Valor de stock reservado.", example = "1")
+    @Schema(description = "Valor numerico de stockReservado.", example = "1")
     private Integer stockReservado;
 
-    @Schema(description = "Valor de stock minimo.", example = "1")
+    @Schema(description = "Valor numerico de stockMinimo.", example = "1")
     private Integer stockMinimo;
 
 }

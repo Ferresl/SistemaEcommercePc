@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class ProductoResponseDTO {
     @Schema(description = "Identificador unico del registro.", example = "1")
     private Integer id;
-    @Schema(description = "Nombre del registro o del usuario.", example = "Juan")
+    @Schema(description = "Nombre comercial del producto.", example = "Procesador Ryzen 5 7600")
     private String nombre;
     @Schema(description = "Marca comercial del producto.", example = "AMD")
     private String marca;
@@ -22,10 +22,10 @@ public class ProductoResponseDTO {
     private String modelo;
     @Schema(description = "Precio del producto.", example = "249990")
     private BigDecimal precio;
-    @Schema(description = "Valor de imagen url.", example = "Ejemplo")
+    @Schema(description = "URL de la imagen asociada al producto.", example = "https://ejemplo.cl/producto.png")
     private String imagenUrl;
     @Schema(description = "Identificador de la categoria asociada.", example = "1")
     private Integer categoriaId;
-    @Schema(description = "Estado actual del registro.", example = "ACTIVO")
+    @Schema(description = "Estado de disponibilidad del producto.", example = "ACTIVO")
     private String estado;
 }

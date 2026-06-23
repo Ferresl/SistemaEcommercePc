@@ -26,12 +26,12 @@ public class InventarioCreateDTO {
 
     @NotNull(message = "El campo stockReservado es obligatorio")
     @Min(value = 0, message = "El campo stockReservado no puede ser negativo")
-    @Schema(description = "Valor de stock reservado.", example = "1")
+    @Schema(description = "Valor numerico de stockReservado.", example = "1")
     private Integer stockReservado;
 
     @NotNull(message = "El campo stockMinimo es obligatorio")
     @Min(value = 0, message = "El campo stockMinimo no puede ser negativo")
-    @Schema(description = "Valor de stock minimo.", example = "1")
+    @Schema(description = "Valor numerico de stockMinimo.", example = "1")
     private Integer stockMinimo;
 
 }
