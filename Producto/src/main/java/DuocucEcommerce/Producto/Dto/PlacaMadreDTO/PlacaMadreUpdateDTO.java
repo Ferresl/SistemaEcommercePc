@@ -6,30 +6,38 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Schema(description = "Datos permitidos para actualizar placa madre.")
 public class PlacaMadreUpdateDTO {
 
     @NotNull(message = "El campo productoId es obligatorio")
+    @Schema(description = "Identificador del producto asociado.", example = "1")
     private Integer productoId;
 
     @NotBlank(message = "El campo socket es obligatorio")
+    @Schema(description = "Socket compatible del componente.", example = "AM5")
     private String socket;
 
     @NotBlank(message = "El campo chipset es obligatorio")
+    @Schema(description = "Chipset principal del componente.", example = "B650")
     private String chipset;
 
     @NotBlank(message = "El campo tipoRamSoportada es obligatorio")
+    @Schema(description = "Valor de tipo ram soportada.", example = "Ejemplo")
     private String tipoRamSoportada;
 
     @NotNull(message = "El campo ramMaximaGb es obligatorio")
     @Min(value = 1, message = "El campo ramMaximaGb debe ser mayor a 0")
+    @Schema(description = "Valor de ram maxima gb.", example = "1")
     private Integer ramMaximaGb;
 
     @NotBlank(message = "El campo formato es obligatorio")
+    @Schema(description = "Formato fisico del componente.", example = "ATX")
     private String formato;
 
 }

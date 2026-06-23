@@ -21,7 +21,10 @@ import DuocucEcommerce.Producto.Dto.ProductoDTO.ProductoUpdateDTO;
 import DuocucEcommerce.Producto.Service.ProductoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Productos", description = "Catalogo general de productos.")
 @RestController
 @RequestMapping("/api/productos")
 @RequiredArgsConstructor
@@ -29,30 +32,35 @@ public class ProductoController {
     private final ProductoService service;
     
     
+    @Operation(summary = "Listar productos", description = "Obtiene todos los registros de productos.")
     @GetMapping 
     public ResponseEntity<List<ProductoResponseDTO>> listar() { 
         return ResponseEntity.ok(service.listar()); 
     }
     
     
+    @Operation(summary = "Buscar producto por ID", description = "Obtiene un registro de producto usando su identificador.")
     @GetMapping("/{id}") 
     public ResponseEntity<ProductoResponseDTO> buscarPorId(@PathVariable Integer id) { 
         return ResponseEntity.ok(service.buscarPorId(id)); 
     }
     
     
+    @Operation(summary = "Crear producto", description = "Registra un nuevo recurso de producto.")
     @PostMapping 
     public ResponseEntity<ProductoResponseDTO> crear(@Valid @RequestBody ProductoCreateDTO dto) { 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
     }
     
     
+    @Operation(summary = "Actualizar producto", description = "Actualiza los datos de un registro de producto.")
     @PutMapping("/{id}") 
     public ResponseEntity<ProductoResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody ProductoUpdateDTO dto) { 
         return ResponseEntity.ok(service.actualizar(id, dto)); 
     }
     
     
+    @Operation(summary = "Eliminar producto", description = "Elimina un registro de producto.")
     @DeleteMapping("/{id}") 
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
         service.eliminar(id); 
@@ -60,17 +68,20 @@ public class ProductoController {
     }
     
     
+    @Operation(summary = "Consultar productos", description = "Consulta informacion de productos.")
     @GetMapping("/categoria/{categoriaId}") 
     public ResponseEntity<List<ProductoResponseDTO>> listarPorCategoria(@PathVariable Integer categoriaId) { 
         return ResponseEntity.ok(service.listarPorCategoria(categoriaId)); 
     }
     
     
+    @Operation(summary = "Consultar productos", description = "Consulta informacion de productos.")
     @GetMapping("/buscar") 
     public ResponseEntity<List<ProductoResponseDTO>> buscar(@RequestParam String texto) { 
         return ResponseEntity.ok(service.buscarPorTexto(texto)); }
     
     
+    @Operation(summary = "Consultar productos", description = "Consulta informacion de productos.")
     @GetMapping("/precio") 
     public ResponseEntity<List<ProductoResponseDTO>> filtrarPrecio(@RequestParam BigDecimal rangoMin, @RequestParam BigDecimal rangoMax) { 
         return ResponseEntity.ok(service.filtrarPorPrecio(rangoMin, rangoMax)); 
