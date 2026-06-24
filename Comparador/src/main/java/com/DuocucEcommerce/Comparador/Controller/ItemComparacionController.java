@@ -20,33 +20,41 @@ import com.DuocucEcommerce.Comparador.Service.ItemComparacionService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Items de comparacion", description = "Productos incluidos dentro de una comparacion.")
 @RestController
 @RequestMapping("/api/comparaciones/items")
 @RequiredArgsConstructor
 public class ItemComparacionController {
     private final ItemComparacionService service;
 
+    @Operation(summary = "Listar items de comparacion", description = "Obtiene todos los registros de items de comparacion.")
     @GetMapping
     public ResponseEntity<List<ItemComparacionResponseDTO>> listar() { 
         return ResponseEntity.ok(service.listar()); 
     }
     
+    @Operation(summary = "Buscar item de comparacion por ID", description = "Obtiene un registro de item de comparacion usando su identificador.")
     @GetMapping("/{id}")
     public ResponseEntity<ItemComparacionResponseDTO> buscarPorId(@PathVariable Integer id) {
          return ResponseEntity.ok(service.buscarPorId(id)); 
         }
     
+    @Operation(summary = "Crear item de comparacion", description = "Registra un nuevo recurso de item de comparacion.")
     @PostMapping
     public ResponseEntity<ItemComparacionResponseDTO> crear(@Valid @RequestBody ItemComparacionCreateDTO dto) { 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(dto)); 
     }
     
+    @Operation(summary = "Actualizar item de comparacion", description = "Actualiza los datos de un registro de item de comparacion.")
     @PutMapping("/{id}")
     public ResponseEntity<ItemComparacionResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody ItemComparacionUpdateDTO dto) { 
         return ResponseEntity.ok(service.actualizar(id, dto)); 
     }
     
+    @Operation(summary = "Eliminar item de comparacion", description = "Elimina un registro de item de comparacion.")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) { 
         service.eliminar(id); 
