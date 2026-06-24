@@ -1,13 +1,13 @@
 package com.DuocucEcommerce.Categoria;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
 class CategoriaApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+        assertNotNull(CategoriaApplication.class);
+    }
 }

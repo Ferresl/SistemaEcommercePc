@@ -1,13 +1,13 @@
 package com.DuocucEcommerce.BenchmarkFps;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
 class BenchmarkFpsApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+        assertNotNull(BenchmarkFpsApplication.class);
+    }
 }

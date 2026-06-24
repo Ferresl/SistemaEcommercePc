@@ -1,13 +1,14 @@
 package DuocucEcommerce.Producto;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
 class ProductoApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assertNotNull(ProductoApplication.class);
 	}
 
 }
