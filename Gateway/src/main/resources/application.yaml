@@ -1,0 +1,141 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: auth-ms
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**
+
+            - id: usuarios-ms
+              uri: lb://usuario-service
+              predicates:
+                - Path=/api/usuarios/**
+
+            - id: direcciones-ms
+              uri: lb://usuario-service
+              predicates:
+                - Path=/api/direcciones/**
+
+            - id: productos-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/productos/**
+
+            - id: productos-cpus-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/cpus/**
+
+            - id: productos-gpus-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/gpus/**
+
+            - id: productos-rams-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/rams/**
+
+            - id: productos-placas-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/placas-madre/**
+
+            - id: productos-almacenamientos-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/almacenamientos/**
+
+            - id: productos-fuentes-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/fuentes/**
+
+            - id: productos-gabinetes-ms
+              uri: lb://producto-service
+              predicates:
+                - Path=/api/gabinetes/**
+
+            - id: categorias-ms
+              uri: lb://categoria-service
+              predicates:
+                - Path=/api/categorias/**
+
+            - id: inventarios-ms
+              uri: lb://inventario-service
+              predicates:
+                - Path=/api/inventarios/**
+
+            - id: carritos-ms
+              uri: lb://carrito-service
+              predicates:
+                - Path=/api/carritos/**
+
+            - id: items-carrito-ms
+              uri: lb://carrito-service
+              predicates:
+                - Path=/api/items-carrito/**
+
+            - id: pedidos-ms
+              uri: lb://pedido-service
+              predicates:
+                - Path=/api/pedidos/**
+
+            - id: detalles-pedido-ms
+              uri: lb://pedido-service
+              predicates:
+                - Path=/api/detalles-pedido/**
+
+            - id: configuraciones-ms
+              uri: lb://configuracion-pc-service
+              predicates:
+                - Path=/api/configuraciones/**
+
+            - id: compatibilidad-ms
+              uri: lb://compatibilidad-service
+              predicates:
+                - Path=/api/compatibilidad/**
+
+            - id: comparaciones-ms
+              uri: lb://comparador-service
+              predicates:
+                - Path=/api/comparaciones/**
+
+            - id: notificaciones-ms
+              uri: lb://notificacion-service
+              predicates:
+                - Path=/api/notificaciones/**
+
+            - id: benchmarks-ms
+              uri: lb://benchmark-fps-service
+              predicates:
+                - Path=/api/benchmarks/**
+
+            - id: fps-ms
+              uri: lb://benchmark-fps-service
+              predicates:
+                - Path=/api/fps/**
+
+            - id: resoluciones-ms
+              uri: lb://benchmark-fps-service
+              predicates:
+                - Path=/api/resoluciones/**
+
+            - id: videojuegos-ms
+              uri: lb://benchmark-fps-service
+              predicates:
+                - Path=/api/videojuegos/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

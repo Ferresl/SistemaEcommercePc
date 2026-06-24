@@ -1,17 +1,13 @@
-
 spring:
-    application:
-        name:eureka-server
+  application:
+    name: eureka-server
 
 server:
-    port:
-        8761
-    
+  port: 8761
 
 eureka:
-    client:
-        register-with-eureka: false #le dice que no se registre a si mismo
-        fetch-registry: false #le dice al servidor eureka que no busque otras
-                              #rutas de otros 
-                              #servidores eureka porque es el unico que tenemos
-
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
