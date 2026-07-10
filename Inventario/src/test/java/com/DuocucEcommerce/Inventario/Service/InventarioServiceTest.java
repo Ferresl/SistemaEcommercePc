@@ -1,6 +1,7 @@
 package com.DuocucEcommerce.Inventario.Service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -88,6 +89,8 @@ public class InventarioServiceTest {
 
         // ASSERT
         assertEquals(1, resultado.getId());
+
+        verify(repository , times(1)).findById(1);
     }
 
     @Test
@@ -101,6 +104,8 @@ public class InventarioServiceTest {
         });
 
         assertEquals("Inventario no encontrado con id 99", ex.getMessage());
+
+        verify(repository , times(1)).findById(99);
     }
 
     @Test
@@ -113,6 +118,22 @@ public class InventarioServiceTest {
 
         // ASSERT
         assertEquals(10, resultado.getProductoId());
+    }
+
+    @Test 
+    void buscarPorProducto_noEncontrado() { 
+        //ARRANGE
+        when(repository.findByProductoId(99)).thenReturn(Optional.empty());
+
+        //act 
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , () -> {
+            service.buscarPorProducto(99);
+        });
+
+        assertEquals("Inventario no encontrado para producto 99" , ex.getMessage());
+        verify(repository , times(1)).findByProductoId(99);
+
+        
     }
 
     @Test

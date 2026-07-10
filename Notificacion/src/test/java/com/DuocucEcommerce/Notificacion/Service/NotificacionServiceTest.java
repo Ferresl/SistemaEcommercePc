@@ -1,6 +1,7 @@
 package com.DuocucEcommerce.Notificacion.Service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ public class NotificacionServiceTest {
         // ASSERT
         assertEquals(1, resultado.size());
         assertEquals("Pedido confirmado", resultado.get(0).getTitulo());
+        verify(repository , times(1)).findAll();
     }
 
     @Test
@@ -87,6 +89,9 @@ public class NotificacionServiceTest {
         // ASSERT
         assertEquals(1, resultado.size());
         assertEquals(10, resultado.get(0).getUsuarioId());
+        verify(repository).findById(1);
+        
+
     }
 
     @Test
@@ -114,6 +119,8 @@ public class NotificacionServiceTest {
         });
 
         assertEquals("Notificacion no encontrada con id 99", ex.getMessage());
+
+        verify(repository).findById(1);
     }
 
     @Test

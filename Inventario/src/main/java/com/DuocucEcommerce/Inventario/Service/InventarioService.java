@@ -50,7 +50,8 @@ public class InventarioService {
     public InventarioResponseDTO actualizar(Integer id, InventarioUpdateDTO dto) { 
         productoClient.obtenerPorId(dto.getProductoId()); 
         validarStocks(dto.getStockDisponible(), 
-        dto.getStockReservado(), dto.getStockMinimo()); 
+        dto.getStockReservado(), 
+        dto.getStockMinimo()); 
         Inventario inv = obtenerEntidad(id); 
         copiarDatos(dto, inv); 
         return toResponse(repository.save(inv)); 
@@ -66,7 +67,8 @@ public class InventarioService {
             Inventario inv = repository.findByProductoId(productoId).orElseThrow(() -> new ResourceNotFoundException("Inventario no encontrado")); 
             if (inv.getStockDisponible() < cantidad) { 
                 log.warn("Stock insuficiente para producto {}", productoId); throw new BadRequestException("Stock insuficiente"); } 
-                inv.setStockDisponible(inv.getStockDisponible() - cantidad); return toResponse(repository.save(inv)); 
+                inv.setStockDisponible(inv.getStockDisponible() - cantidad); 
+                return toResponse(repository.save(inv)); 
             }
     
     public InventarioResponseDTO reponer(Integer productoId, Integer cantidad) { 
