@@ -1,17 +1,22 @@
 package DuocucEcommerce.User.Service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import DuocucEcommerce.User.Dto.DireccionDto.DireccionCreateDTO;
@@ -169,6 +174,43 @@ public class DireccionServiceTest {
         assertEquals("Metropolitana", resultado.getRegion());
     }
 
+    @Test 
+    void actualizar_direccionNoExiste_lanzaNotFound(){
+        //ARRANGE 
+        when(repository.findById(99)).thenReturn(Optional.empty());
+        
+        //ACT 
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , ()  -> {
+            service.actualizar(99 , updateDTO);
+        } );
+
+        assertEquals("Direccion no encontrada con id 99", ex.getMessage());
+
+        verify(repository).findById(99);
+        verify(repository , never()).save(any(Direccion.class)); 
+    }
+
+
+    @Test 
+    void actualizar_UsuarioNoExiste_lanzaBadRequest (){
+        //ARRANGE
+        when(usuarioRepository.existsById(10)).thenReturn(false);
+
+        //ACT 
+        BadRequestException ex = assertThrows(BadRequestException.class , () -> {
+            service.actualizar(1 , updateDTO);
+        } );
+
+            assertEquals("Usuario no encontrado", ex.getMessage());
+        
+
+        verify(usuarioRepository).existsById(10);
+        verify(repository, never()).findById(1);;
+        verify(repository , never()).save(any(Direccion.class));
+
+
+    }
+
     @Test
     void eliminar_exitoso() {
         // ARRANGE
@@ -177,5 +219,23 @@ public class DireccionServiceTest {
         // ACT + ASSERT
         assertDoesNotThrow(() -> service.eliminar(1));
         verify(repository, times(1)).delete(direccionEjemplo);
+    }
+
+    @Test 
+    void eliminar_noExitoso (){
+        //ARRANGE 
+        when(repository.findById(99)).thenReturn(Optional.empty());
+
+        //ACT 
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class, () -> {
+            service.eliminar(99);
+        } );
+        
+        assertEquals("Direccion no encontrada con id 99" , ex.getMessage());
+
+        verify(repository).findById(99);
+        verify(repository , never()).delete(any(Direccion.class));
+
+
     }
 }

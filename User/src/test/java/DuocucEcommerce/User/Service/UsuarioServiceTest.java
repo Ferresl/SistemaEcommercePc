@@ -1,17 +1,22 @@
 package DuocucEcommerce.User.Service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import DuocucEcommerce.User.Dto.UsuarioDto.UsuarioCreateDTO;
@@ -118,7 +123,21 @@ public class UsuarioServiceTest {
         // ASSERT
         assertEquals("Juan", resultado.getNombre());
     }
+    
+    @Test 
+    void buscarPorEmail_noEncontrado(){
+        //ARRAGNE 
+        when(repository.findByEmail("jua@correo.cl")).thenReturn(Optional.empty());
 
+        //ACT 
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , () -> {
+            service.buscarPorEmail("jua@correo.cl");
+        });
+
+        //ASSERT 
+        assertEquals("Usuario no encontrado con email jua@correo.cl" , ex.getMessage());
+
+    }
     @Test
     void crear_retornaUsuarioGuardado() {
         // ARRANGE
@@ -162,6 +181,24 @@ public class UsuarioServiceTest {
     }
 
     @Test
+    void actualizar_noEncuentraId (){
+        //ARRANGE 
+        when(repository.findById(99)).thenReturn(Optional.empty());
+
+        //ACT 
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , () -> {
+            service.actualizar(99 , updateDTO);
+        });
+
+        assertEquals("Usuario no encontrado con id 99" , ex.getMessage());
+
+        verify(repository).findById(99);
+        verify(repository , never()).save(any(Usuario.class));
+
+
+    }
+
+    @Test
     void eliminar_exitoso() {
         // ARRANGE
         when(repository.findById(1)).thenReturn(Optional.of(usuarioEjemplo));
@@ -169,5 +206,22 @@ public class UsuarioServiceTest {
         // ACT + ASSERT
         assertDoesNotThrow(() -> service.eliminar(1));
         verify(repository, times(1)).delete(usuarioEjemplo);
+    }
+
+    @Test
+    void eliminar_noExitoso_LanzarResourceNotFound() { 
+        //ARRANGE 
+        when(repository.findById(99)).thenReturn(Optional.empty());
+
+        //ACT
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , () -> { 
+            service.buscarPorId(99);
+        });
+
+        assertEquals("Usuario no encontrado con id 99" , ex.getMessage());
+
+
+
+
     }
 }
