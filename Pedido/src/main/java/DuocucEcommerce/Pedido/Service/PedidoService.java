@@ -12,6 +12,7 @@ import DuocucEcommerce.Pedido.Client.NotificacionCreateDTO;
 import DuocucEcommerce.Pedido.Client.ProductoClient;
 import DuocucEcommerce.Pedido.Client.ProductoResponseDTO;
 import DuocucEcommerce.Pedido.Client.UsuarioClient;
+import DuocucEcommerce.Pedido.Client.UsuarioResponseDTO;
 import DuocucEcommerce.Pedido.Dto.DetallePedidoDTO.DetallePedidoRequestDTO;
 import DuocucEcommerce.Pedido.Dto.DetallePedidoDTO.DetallePedidoResponseDTO;
 import DuocucEcommerce.Pedido.Dto.EstadoPedidoDTO.EstadoPedidoUpdateDTO;
@@ -90,24 +91,35 @@ public class PedidoService {
     }
    
     private Pedido obtenerPedido(Integer id) { 
-        return pedidoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con id " + id)); }
+        return pedidoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con id " + id)); 
+    }
    
     private DetallePedidoResponseDTO detalleResponse(DetallePedido d) { 
+        ProductoResponseDTO producto = productoClient.obtenerPorId(d.getProductoId());
         return DetallePedidoResponseDTO.builder()
         .id(d.getId())
         .pedidoId(d.getPedidoId())
         .productoId(d.getProductoId())
+        .nombreProducto(producto.getNombre())
         .cantidad(d.getCantidad())
         .precioUnitario(d.getPrecioUnitario())
-        .build(); }
+        .build(); 
+    }
    
     private PedidoResponseDTO toResponse(Pedido p) { 
+        UsuarioResponseDTO usuario = usuarioClient.obtenerUsuario(p.getUsuarioId());
         return PedidoResponseDTO.builder()
         .id(p.getId())
         .usuarioId(p.getUsuarioId())
+        .emailUsuario(usuario.getEmail())
         .direccionId(p.getDireccionId())
         .subtotal(p.getSubtotal())
         .total(p.getTotal())
         .estado(p.getEstado())
-        .codigoConfirmacion(p.getCodigoConfirmacion()).detalles(detalleRepository.findByPedidoId(p.getId()).stream().map(this::detalleResponse).toList()).build(); }
+        .codigoConfirmacion(p.getCodigoConfirmacion())
+        .detalles(detalleRepository.findByPedidoId(p.getId())
+                    .stream().map(this::detalleResponse)
+                    .toList())
+                    .build(); 
+                }
 }

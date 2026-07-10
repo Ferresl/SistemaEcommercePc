@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +62,8 @@ class PedidoServiceTest {
 
     private Pedido pedido;
     private DetallePedido detalle;
+    private UsuarioResponseDTO usuario;
+    private ProductoResponseDTO producto;
 
     @BeforeEach
     void setUp() {
@@ -69,31 +72,49 @@ class PedidoServiceTest {
                 .subtotal(new BigDecimal("3000")).total(new BigDecimal("3000"))
                 .estado("CREADO").codigoConfirmacion("PED-ABC12345")
                 .build();
+
         detalle = DetallePedido.builder()
                 .id(10).pedidoId(1).productoId(20).cantidad(2).precioUnitario(new BigDecimal("1500"))
                 .build();
+
+        usuario = new UsuarioResponseDTO();
+        usuario.setId(2);
+        usuario.setEmail("juan.perez@correo.cl");
+
+        producto = new ProductoResponseDTO();
+        producto.setId(20);
+        producto.setNombre("CPU");
+        producto.setPrecio(new BigDecimal("1500"));
     }
 
     @Test
     void listarRetornaPedidos() {
         when(pedidoRepository.findAll()).thenReturn(List.of(pedido));
+        when(usuarioClient.obtenerUsuario(2)).thenReturn(usuario);
+        when(productoClient.obtenerPorId(20)).thenReturn(producto);
         when(detalleRepository.findByPedidoId(1)).thenReturn(List.of(detalle));
 
         var respuesta = service.listar();
 
         assertEquals(1, respuesta.size());
+        assertEquals("juan.perez@correo.cl", respuesta.get(0).getEmailUsuario());
         assertEquals(1, respuesta.get(0).getDetalles().size());
+        assertEquals("CPU", respuesta.get(0).getDetalles().get(0).getNombreProducto());
     }
 
     @Test
     void buscarPorIdRetornaPedido() {
         when(pedidoRepository.findById(1)).thenReturn(Optional.of(pedido));
+        when(usuarioClient.obtenerUsuario(2)).thenReturn(usuario);
+        when(productoClient.obtenerPorId(20)).thenReturn(producto);
         when(detalleRepository.findByPedidoId(1)).thenReturn(List.of(detalle));
 
         var respuesta = service.buscarPorId(1);
 
         assertEquals(2, respuesta.getUsuarioId());
+        assertEquals("juan.perez@correo.cl", respuesta.getEmailUsuario());
         assertEquals(new BigDecimal("3000"), respuesta.getTotal());
+        assertEquals("CPU", respuesta.getDetalles().get(0).getNombreProducto());
     }
 
     @Test
@@ -106,11 +127,14 @@ class PedidoServiceTest {
     @Test
     void listarPorUsuarioRetornaPedidos() {
         when(pedidoRepository.findByUsuarioId(2)).thenReturn(List.of(pedido));
+        when(usuarioClient.obtenerUsuario(2)).thenReturn(usuario);
+        when(productoClient.obtenerPorId(20)).thenReturn(producto);
         when(detalleRepository.findByPedidoId(1)).thenReturn(List.of(detalle));
 
         var respuesta = service.listarPorUsuario(2);
 
         assertEquals(1, respuesta.size());
+        assertEquals("juan.perez@correo.cl", respuesta.get(0).getEmailUsuario());
         verify(pedidoRepository).findByUsuarioId(2);
     }
 
@@ -120,12 +144,8 @@ class PedidoServiceTest {
                 .usuarioId(2).direccionId(3)
                 .detalles(List.of(new DetallePedidoRequestDTO(20, 2)))
                 .build();
-        var producto = new ProductoResponseDTO();
-        producto.setId(20);
-        producto.setNombre("CPU");
-        producto.setPrecio(new BigDecimal("1500"));
 
-        when(usuarioClient.obtenerUsuario(2)).thenReturn(new UsuarioResponseDTO());
+        when(usuarioClient.obtenerUsuario(2)).thenReturn(usuario);
         when(usuarioClient.obtenerDireccion(3)).thenReturn(new DireccionResponseDTO());
         when(productoClient.obtenerPorId(20)).thenReturn(producto);
         when(pedidoRepository.save(any(Pedido.class))).thenAnswer(invocation -> {
@@ -144,8 +164,10 @@ class PedidoServiceTest {
         var respuesta = service.crear(dto);
 
         assertEquals(new BigDecimal("3000"), respuesta.getTotal());
+        assertEquals("juan.perez@correo.cl", respuesta.getEmailUsuario());
+        assertEquals("CPU", respuesta.getDetalles().get(0).getNombreProducto());
         assertNotNull(respuesta.getCodigoConfirmacion());
-        verify(usuarioClient).obtenerUsuario(2);
+        verify(usuarioClient, times(2)).obtenerUsuario(2);
         verify(usuarioClient).obtenerDireccion(3);
         verify(inventarioClient).descontar(20, 2);
         verify(notificacionClient).crear(any());
@@ -156,6 +178,8 @@ class PedidoServiceTest {
         var dto = PedidoUpdateDTO.builder().usuarioId(4).direccionId(5).estado("PAGADO").build();
         when(pedidoRepository.findById(1)).thenReturn(Optional.of(pedido));
         when(pedidoRepository.save(any(Pedido.class))).thenReturn(pedido);
+        when(usuarioClient.obtenerUsuario(4)).thenReturn(usuario);
+        when(productoClient.obtenerPorId(20)).thenReturn(producto);
         when(detalleRepository.findByPedidoId(1)).thenReturn(List.of(detalle));
 
         var respuesta = service.actualizar(1, dto);
@@ -169,6 +193,8 @@ class PedidoServiceTest {
     void cambiarEstadoActualizaPedido() {
         when(pedidoRepository.findById(1)).thenReturn(Optional.of(pedido));
         when(pedidoRepository.save(any(Pedido.class))).thenReturn(pedido);
+        when(usuarioClient.obtenerUsuario(2)).thenReturn(usuario);
+        when(productoClient.obtenerPorId(20)).thenReturn(producto);
         when(detalleRepository.findByPedidoId(1)).thenReturn(List.of(detalle));
 
         var respuesta = service.cambiarEstado(1, new EstadoPedidoUpdateDTO("ENVIADO"));

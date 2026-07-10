@@ -1,11 +1,12 @@
 package DuocucEcommerce.Pedido.Dto.DetallePedidoDTO;
 
 import java.math.BigDecimal;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +23,9 @@ public class DetallePedidoResponseDTO {
 
     @Schema(description = "Identificador del producto asociado.", example = "1")
     private Integer productoId;
+
+    @Schema(description = "Nombre del producto. " , example ="Intel i5")
+    private String nombreProducto;
 
     @Schema(description = "Cantidad de unidades solicitadas.", example = "2")
     private Integer cantidad;

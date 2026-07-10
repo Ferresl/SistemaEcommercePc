@@ -22,6 +22,9 @@ public class PedidoResponseDTO {
    
     @Schema(description = "Identificador del usuario asociado.", example = "1")
     private Integer usuarioId;
+    
+    @Schema(description = "Correo electronico del usuario.", example = "juan.ferreira@correo.cl")
+    private String emailUsuario;
    
     @Schema(description = "Identificador de la direccion de entrega.", example = "1")
     private Integer direccionId;

@@ -1,4 +1,4 @@
-﻿package DuocucEcommerce.Pedido.Config;
+package DuocucEcommerce.Pedido.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
