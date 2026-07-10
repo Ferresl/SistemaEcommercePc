@@ -21,7 +21,7 @@ import com.DuocucEcommerce.Notificacion.Exception.ResourceNotFoundException;
 import com.DuocucEcommerce.Notificacion.Model.Notificacion;
 import com.DuocucEcommerce.Notificacion.Repository.NotificacionRepository;
 
-@ExtendWith(MockitoExtension.class) // sin Spring, solo Mockito
+@ExtendWith(MockitoExtension.class) 
 public class NotificacionServiceTest {
 
     @Mock
@@ -99,6 +99,8 @@ public class NotificacionServiceTest {
 
         // ASSERT
         assertEquals(1, resultado.getId());
+        assertEquals("Pedido confirmado" , resultado.getTitulo());
+        verify(repository).findById(1);
     }
 
     @Test
@@ -127,6 +129,8 @@ public class NotificacionServiceTest {
         verify(repository, times(1)).save(any(Notificacion.class));
     }
 
+    
+
     @Test
     void actualizar_retornaNotificacionActualizada() {
         // ARRANGE
@@ -138,6 +142,10 @@ public class NotificacionServiceTest {
 
         // ASSERT
         assertEquals("Pedido confirmado", resultado.getTitulo());
+
+        verify(repository).findById(1);
+        verify(repository).save(notificacionEjemplo);
+        
     }
 
     @Test
@@ -151,6 +159,9 @@ public class NotificacionServiceTest {
 
         // ASSERT
         assertTrue(resultado.getLeida());
+
+        verify(repository).findById(1);
+        verify(repository).save(notificacionEjemplo);
     }
 
     @Test
@@ -161,5 +172,20 @@ public class NotificacionServiceTest {
         // ACT + ASSERT
         assertDoesNotThrow(() -> service.eliminar(1));
         verify(repository, times(1)).delete(notificacionEjemplo);
+    }
+
+    @Test
+    void eliminar_noExitoso(){
+        //ARRANGE 
+        when(repository.findById(99)).thenReturn(Optional.empty());
+
+        //ACT
+        ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , () ->{
+            service.eliminar(99);
+        } );
+
+        assertEquals("Notificacion no encontrada con id 99" , ex.getMessage());
+        verify(repository).findById(99);
+        verify(repository , never()).delete(any(Notificacion.class));
     }
 }
