@@ -215,10 +215,13 @@ public class UsuarioServiceTest {
 
         //ACT
         ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class , () -> { 
-            service.buscarPorId(99);
+            service.eliminar(99);
         });
 
         assertEquals("Usuario no encontrado con id 99" , ex.getMessage());
+        
+        verify(repository).findById(99);
+        verify(repository , never()).delete(any(Usuario.class));
 
 
 
