@@ -1,16 +1,12 @@
 package com.DuocucEcommerce.Carrito.Client;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.DuocucEcommerce.Carrito.Exception.BadRequestException;
+@FeignClient(name = "inventario-service")
+public interface InventarioClient {
 
-import lombok.RequiredArgsConstructor;
-
-@Component
-@RequiredArgsConstructor
-public class InventarioClient {
-    private final RestTemplate restTemplate;
-    public InventarioResponseDTO obtenerPorProducto(Integer productoId) { try { return restTemplate.getForObject("http://localhost:8085/api/inventarios/producto/" + productoId, InventarioResponseDTO.class); } catch (RestClientException ex) { throw new BadRequestException("Inventario no encontrado"); } }
+    @GetMapping("/api/inventarios/producto/{productoId}")
+    InventarioResponseDTO obtenerPorProducto(@PathVariable("productoId") Integer productoId);
 }

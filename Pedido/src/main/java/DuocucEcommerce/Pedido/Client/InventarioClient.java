@@ -1,24 +1,13 @@
 package DuocucEcommerce.Pedido.Client;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import DuocucEcommerce.Pedido.Exception.BadRequestException;
-import lombok.RequiredArgsConstructor;
+@FeignClient(name = "inventario-service")
+public interface InventarioClient {
 
-@Component
-@RequiredArgsConstructor
-public class InventarioClient {
-    private final RestTemplate restTemplate;
-    public void descontar(
-
-        Integer productoId, 
-
-        Integer cantidad) { 
-            try { restTemplate.put("http://localhost:8085/api/inventarios/descontar/" + productoId + "?cantidad=" + cantidad, null); 
-
-            } catch (RestClientException ex) { 
-                throw new BadRequestException("Stock insuficiente o inventario no disponible"); } 
-            }
+    @PutMapping("/api/inventarios/descontar/{productoId}")
+    void descontar(@PathVariable("productoId") Integer productoId, @RequestParam("cantidad") Integer cantidad);
 }

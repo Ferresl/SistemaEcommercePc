@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.DuocucEcommerce.Inventario.Client.ProductoClient;
+import com.DuocucEcommerce.Inventario.Client.ProductoResponseDTO;
 import com.DuocucEcommerce.Inventario.Dto.InventarioCreateDTO;
 import com.DuocucEcommerce.Inventario.Dto.InventarioResponseDTO;
 import com.DuocucEcommerce.Inventario.Dto.InventarioUpdateDTO;
@@ -38,23 +39,23 @@ public class InventarioService {
     }
     
     public InventarioResponseDTO crear(InventarioCreateDTO dto) { 
-        productoClient.obtenerPorId(dto.getProductoId()); 
+        ProductoResponseDTO producto = productoClient.obtenerPorId(dto.getProductoId()); 
         validarStocks(dto.getStockDisponible(), 
         dto.getStockReservado(), 
         dto.getStockMinimo()); 
         Inventario inv = new Inventario(); 
         copiarDatos(dto, inv); 
-        return toResponse(repository.save(inv)); 
+        return toResponse(repository.save(inv), producto); 
     }
     
     public InventarioResponseDTO actualizar(Integer id, InventarioUpdateDTO dto) { 
-        productoClient.obtenerPorId(dto.getProductoId()); 
+        ProductoResponseDTO producto = productoClient.obtenerPorId(dto.getProductoId()); 
         validarStocks(dto.getStockDisponible(), 
         dto.getStockReservado(), 
         dto.getStockMinimo()); 
         Inventario inv = obtenerEntidad(id); 
         copiarDatos(dto, inv); 
-        return toResponse(repository.save(inv)); 
+        return toResponse(repository.save(inv), producto); 
     }
     
     public void eliminar(Integer id) { 
@@ -97,9 +98,14 @@ public class InventarioService {
         inv.setProductoId(dto.getProductoId()); inv.setStockDisponible(dto.getStockDisponible()); inv.setStockReservado(dto.getStockReservado()); inv.setStockMinimo(dto.getStockMinimo()); }
     
     private InventarioResponseDTO toResponse(Inventario inv) { 
+        return toResponse(inv, productoClient.obtenerPorId(inv.getProductoId()));
+    }
+
+    private InventarioResponseDTO toResponse(Inventario inv, ProductoResponseDTO producto) { 
         return InventarioResponseDTO.builder()
         .id(inv.getId())
         .productoId(inv.getProductoId())
+        .nombreProducto(producto != null ? producto.getNombre() : null)
         .stockDisponible(inv.getStockDisponible())
         .stockReservado(inv.getStockReservado())
         .stockMinimo(inv.getStockMinimo())

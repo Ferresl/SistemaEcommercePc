@@ -1,13 +1,12 @@
 package com.DuocucEcommerce.ConfiguracionPc.Client;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.DuocucEcommerce.ConfiguracionPc.Exception.BadRequestException;
+@FeignClient(name = "usuario-service")
+public interface UsuarioClient {
 
-import lombok.RequiredArgsConstructor;
-
-@Component
-@RequiredArgsConstructor
-public class UsuarioClient { private final RestTemplate restTemplate; public void validar(Integer id) { try { restTemplate.getForObject("http://localhost:8082/api/usuarios/" + id, Object.class); } catch (RestClientException ex) { throw new BadRequestException("Usuario no encontrado"); } } }
+    @GetMapping("/api/usuarios/{id}")
+    void validar(@PathVariable("id") Integer id);
+}

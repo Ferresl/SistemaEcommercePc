@@ -1,11 +1,13 @@
 package com.DuocucEcommerce.ConfiguracionPc.Client;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import lombok.RequiredArgsConstructor;
+@FeignClient(name = "notificacion-service")
+public interface NotificacionClient {
 
-@Component
-@RequiredArgsConstructor
-public class NotificacionClient { private final RestTemplate restTemplate; public void crear(NotificacionCreateDTO dto) { try { restTemplate.postForObject("http://localhost:8092/api/notificaciones", dto, Object.class); } catch (Exception ex) { } } }
+    @PostMapping("/api/notificaciones")
+    void crear(@RequestBody NotificacionCreateDTO dto);
+}
 

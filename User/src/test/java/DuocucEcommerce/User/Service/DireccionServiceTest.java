@@ -177,6 +177,7 @@ public class DireccionServiceTest {
     @Test 
     void actualizar_direccionNoExiste_lanzaNotFound(){
         //ARRANGE 
+        when(usuarioRepository.existsById(10)).thenReturn(true);
         when(repository.findById(99)).thenReturn(Optional.empty());
         
         //ACT 

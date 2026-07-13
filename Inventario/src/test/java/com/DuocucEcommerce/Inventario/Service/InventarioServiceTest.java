@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.DuocucEcommerce.Inventario.Client.ProductoClient;
+import com.DuocucEcommerce.Inventario.Client.ProductoResponseDTO;
 import com.DuocucEcommerce.Inventario.Dto.InventarioCreateDTO;
 import com.DuocucEcommerce.Inventario.Dto.InventarioResponseDTO;
 import com.DuocucEcommerce.Inventario.Dto.InventarioUpdateDTO;
@@ -39,6 +40,7 @@ public class InventarioServiceTest {
     private Inventario inventarioEjemplo;
     private InventarioCreateDTO createDTO;
     private InventarioUpdateDTO updateDTO;
+    private ProductoResponseDTO productoEjemplo;
 
     @BeforeEach
     void setUp() {
@@ -62,6 +64,11 @@ public class InventarioServiceTest {
                 .stockReservado(1)
                 .stockMinimo(2)
                 .build();
+
+        productoEjemplo = new ProductoResponseDTO();
+        productoEjemplo.setId(10);
+        productoEjemplo.setNombre("Procesador Ryzen 5 7600");
+        lenient().when(productoClient.obtenerPorId(10)).thenReturn(productoEjemplo);
     }
 
     @Test
@@ -77,6 +84,7 @@ public class InventarioServiceTest {
         // ASSERT
         assertEquals(1, resultado.size());
         assertEquals(10, resultado.get(0).getProductoId());
+        assertEquals("Procesador Ryzen 5 7600", resultado.get(0).getNombreProducto());
     }
 
     @Test
@@ -89,6 +97,7 @@ public class InventarioServiceTest {
 
         // ASSERT
         assertEquals(1, resultado.getId());
+        assertEquals("Procesador Ryzen 5 7600", resultado.getNombreProducto());
 
         verify(repository , times(1)).findById(1);
     }
@@ -118,6 +127,7 @@ public class InventarioServiceTest {
 
         // ASSERT
         assertEquals(10, resultado.getProductoId());
+        assertEquals("Procesador Ryzen 5 7600", resultado.getNombreProducto());
     }
 
     @Test 
@@ -146,6 +156,7 @@ public class InventarioServiceTest {
 
         // ASSERT
         assertEquals(15, resultado.getStockDisponible());
+        assertEquals("Procesador Ryzen 5 7600", resultado.getNombreProducto());
         verify(productoClient, times(1)).obtenerPorId(10);
         verify(repository, times(1)).save(any(Inventario.class));
     }
@@ -175,6 +186,7 @@ public class InventarioServiceTest {
 
         // ASSERT
         assertEquals(15, resultado.getStockDisponible());
+        assertEquals("Procesador Ryzen 5 7600", resultado.getNombreProducto());
         verify(productoClient, times(1)).obtenerPorId(10);
     }
 

@@ -89,7 +89,7 @@ public class NotificacionServiceTest {
         // ASSERT
         assertEquals(1, resultado.size());
         assertEquals(10, resultado.get(0).getUsuarioId());
-        verify(repository).findById(1);
+        verify(repository).findByUsuarioId(10);
         
 
     }
@@ -120,7 +120,7 @@ public class NotificacionServiceTest {
 
         assertEquals("Notificacion no encontrada con id 99", ex.getMessage());
 
-        verify(repository).findById(1);
+        verify(repository).findById(99);
     }
 
     @Test

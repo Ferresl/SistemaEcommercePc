@@ -48,6 +48,7 @@ public class InventarioControllerTest {
         inventarioEjemplo = InventarioResponseDTO.builder()
                 .id(1)
                 .productoId(10)
+                .nombreProducto("Procesador Ryzen 5 7600")
                 .stockDisponible(15)
                 .stockReservado(1)
                 .stockMinimo(2)
@@ -64,7 +65,8 @@ public class InventarioControllerTest {
         // ACT + ASSERT
         mockMvc.perform(get("/api/inventarios"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].productoId").value(10));
+                .andExpect(jsonPath("$[0].productoId").value(10))
+                .andExpect(jsonPath("$[0].nombreProducto").value("Procesador Ryzen 5 7600"));
     }
 
     @Test
@@ -96,7 +98,8 @@ public class InventarioControllerTest {
         // ACT + ASSERT
         mockMvc.perform(get("/api/inventarios/producto/10"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.productoId").value(10));
+                .andExpect(jsonPath("$.productoId").value(10))
+                .andExpect(jsonPath("$.nombreProducto").value("Procesador Ryzen 5 7600"));
     }
 
     @Test

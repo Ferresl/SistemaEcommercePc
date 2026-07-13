@@ -1,14 +1,13 @@
 package com.DuocucEcommerce.ConfiguracionPc.Client;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import com.DuocucEcommerce.ConfiguracionPc.Exception.BadRequestException;
+@FeignClient(name = "compatibilidad-service")
+public interface CompatibilidadClient {
 
-import lombok.RequiredArgsConstructor;
-
-@Component
-@RequiredArgsConstructor
-public class CompatibilidadClient { private final RestTemplate restTemplate; public CompatibilidadResponseDTO evaluar(CompatibilidadRequestDTO dto) { try { return restTemplate.postForObject("http://localhost:8089/api/compatibilidad/evaluar", dto, CompatibilidadResponseDTO.class); } catch (RestClientException ex) { throw new BadRequestException("No se pudo evaluar compatibilidad"); } } }
+    @PostMapping("/api/compatibilidad/evaluar")
+    CompatibilidadResponseDTO evaluar(@RequestBody CompatibilidadRequestDTO dto);
+}
 

@@ -1,29 +1,15 @@
 package DuocucEcommerce.Pedido.Client;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import DuocucEcommerce.Pedido.Exception.BadRequestException;
-import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Component
-@RequiredArgsConstructor
-public class UsuarioClient {
+@FeignClient(name = "usuario-service")
+public interface UsuarioClient {
 
-    private final RestTemplate restTemplate;
+    @GetMapping("/api/usuarios/{id}")
+    UsuarioResponseDTO obtenerUsuario(@PathVariable("id") Integer id);
 
-    public UsuarioResponseDTO obtenerUsuario(Integer id) { 
-        try { return restTemplate.getForObject("http://localhost:8082/api/usuarios/" + id, UsuarioResponseDTO.class); 
-
-        } catch (RestClientException ex) { 
-            throw new BadRequestException("Usuario no encontrado"); } 
-        }
-
-
-    public DireccionResponseDTO obtenerDireccion(Integer id) { 
-        try { return restTemplate.getForObject("http://localhost:8082/api/direcciones/" + id, DireccionResponseDTO.class); 
-
-        } catch (RestClientException ex) { 
-            throw new BadRequestException("Direccion no encontrada"); } 
-        }
+    @GetMapping("/api/direcciones/{id}")
+    DireccionResponseDTO obtenerDireccion(@PathVariable("id") Integer id);
 }

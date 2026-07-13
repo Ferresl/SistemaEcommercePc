@@ -19,6 +19,9 @@ public class InventarioResponseDTO {
     @Schema(description = "Identificador del producto asociado.", example = "1")
     private Integer productoId;
 
+    @Schema(description = "Nombre del producto asociado.", example = "Procesador Ryzen 5 7600")
+    private String nombreProducto;
+
     @Schema(description = "Stock disponible para venta.", example = "15")
     private Integer stockDisponible;
 
